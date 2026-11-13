@@ -13,6 +13,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   test run. It refuses to touch any database whose name does not end in `_test`.
 - Dataset download from MariaDB's releases, resumable, with every file checked against its
   SHA-256 checksum and a corrupt file deleted.
+- Loading of dataset S: articles in Finnish, Swedish and English, the ready-made article
+  vectors, the category tree, and current-text paragraphs for the counterparts of the history
+  set (or for every article with `--paragraphs all`). Repeating the load changes nothing.
 
 ## [0.2.0] - 2026-11-14
 
