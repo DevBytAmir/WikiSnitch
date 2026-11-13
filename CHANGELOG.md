@@ -7,6 +7,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-14
+
 ### Added
 
 - MIT licence, ignore rules for secrets, data files, caches and build output, and the
@@ -16,3 +18,6 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `make setup` creates it from `.env.example`.
 - MariaDB schema: system-versioned `paragraph` and `article_history` tables, a cosine vector
   index on `text_vector`, and tables for signals, coverage gaps and cached answers.
+
+[Unreleased]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/DevBytAmir/WikiSnitch/releases/tag/v0.1.0
