@@ -7,6 +7,13 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- API skeleton: one error body for every failure, a request wrapper that records the SQL it
+  runs (with `?` for values), validated language and `as_of` parameters, and `GET /api/health`
+  with counts and whether the embedder is reachable. The web address allowed by CORS comes
+  from `WEB_ORIGIN`. Every embedder can say whether its service is reachable.
+
 ## [0.3.0] - 2026-11-14
 
 ### Added

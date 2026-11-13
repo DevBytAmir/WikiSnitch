@@ -16,6 +16,7 @@ REQUIRED = {
     "EMBED_MODEL": "model-x",
     "EMBED_DIMENSIONS": "768",
     "DATA_DIR": "somewhere",
+    "WEB_ORIGIN": "https://web.example",
 }
 OPTIONAL = [
     "EMBED_API_KEY",

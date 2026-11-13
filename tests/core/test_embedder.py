@@ -50,7 +50,7 @@ def settings(**overrides):
         "db_host": "h", "db_port": 1, "db_user": "u", "db_password": "p",
         "db_root_password": "r", "db_name": "n", "db_vector_search_depth": 80,
         "embedder": "ollama", "embed_base_url": "http://embed.example/", "embed_model": "m",
-        "embed_dimensions": 3, "data_dir": ".",
+        "embed_dimensions": 3, "data_dir": ".", "web_origin": "http://web.example",
     }  # fmt: skip
     return Settings(**{**values, **overrides})
 
@@ -144,6 +144,31 @@ def test_bad_replies_raise_embedder_unavailable(posts, reply):
     posts.reply = lambda body: reply
     with pytest.raises(EmbedderUnavailable):
         OllamaEmbedder("http://embed.example", "m", 3).embed(["x"])
+
+
+def test_reachable_probes_a_cheap_path_of_each_provider(monkeypatch):
+    seen = []
+
+    def fake_get(url, headers, timeout):
+        seen.append((url, headers))
+        return Reply({}, status_code=200)
+
+    monkeypatch.setattr(embedder_module.requests, "get", fake_get)
+    assert OllamaEmbedder("http://embed.example/", "m", 3).reachable()
+    assert OpenAICompatibleEmbedder("https://api.example/v1", "m", 3, api_key="k").reachable()
+    assert FakeEmbedder().reachable()
+    assert seen == [
+        ("http://embed.example/api/tags", {}),
+        ("https://api.example/v1/models", {"Authorization": "Bearer k"}),
+    ]
+
+
+def test_reachable_is_false_on_an_error_status_or_a_network_failure(monkeypatch):
+    monkeypatch.setattr(
+        embedder_module.requests, "get", lambda url, headers, timeout: Reply({}, status_code=401)
+    )
+    assert not OpenAICompatibleEmbedder("https://api.example/v1", "m", 3).reachable()
+    assert not OllamaEmbedder("http://127.0.0.1:9", "m", 3).reachable(timeout=1)
 
 
 def test_get_embedder_selects_the_provider_by_setting():

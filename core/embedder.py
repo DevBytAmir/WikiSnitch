@@ -33,6 +33,8 @@ class Embedder(Protocol):
 
     def embed(self, texts: list[str]) -> list[list[float]]: ...
 
+    def reachable(self) -> bool: ...
+
 
 class _HttpEmbedder:
     """Shared behaviour of the HTTP providers: batching, errors and the dimension check.
@@ -68,6 +70,9 @@ class _HttpEmbedder:
     def _read(self, reply: dict[str, Any]) -> list[list[float]]:
         raise NotImplementedError
 
+    def _probe_path(self) -> str:
+        raise NotImplementedError
+
     def _headers(self) -> dict[str, str]:
         return {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
 
@@ -87,6 +92,16 @@ class _HttpEmbedder:
             return self._read(response.json())
         except (KeyError, IndexError, TypeError, ValueError) as exc:
             raise EmbedderUnavailable(f"{self.name} sent an unexpected reply") from exc
+
+    def reachable(self, timeout: float = 1.0) -> bool:
+        """Whether the service answers a cheap, free request. It does not embed anything."""
+        try:
+            response = requests.get(
+                f"{self.url}{self._probe_path()}", headers=self._headers(), timeout=timeout
+            )
+        except requests.RequestException:
+            return False
+        return response.status_code == 200
 
     def embed(self, texts: list[str]) -> list[list[float]]:
         """Return one vector per text, in order.
@@ -118,6 +133,9 @@ class OllamaEmbedder(_HttpEmbedder):
     def _path(self) -> str:
         return "/api/embed"
 
+    def _probe_path(self) -> str:
+        return "/api/tags"
+
     def _body(self, chunk: list[str]) -> dict[str, Any]:
         return {
             "model": self.model,
@@ -137,6 +155,9 @@ class OpenAICompatibleEmbedder(_HttpEmbedder):
 
     def _path(self) -> str:
         return "/embeddings"
+
+    def _probe_path(self) -> str:
+        return "/models"
 
     def _body(self, chunk: list[str]) -> dict[str, Any]:
         return {"model": self.model, "input": chunk}
@@ -161,6 +182,9 @@ class FakeEmbedder:
         seed = int.from_bytes(hashlib.md5(token.encode("utf-8")).digest()[:8], "big")
         rng = random.Random(seed)
         return [rng.gauss(0, 1) for _ in range(self.dimensions)]
+
+    def reachable(self) -> bool:
+        return True
 
     def embed(self, texts: list[str]) -> list[list[float]]:
         return [self._embed_one(text) for text in texts]

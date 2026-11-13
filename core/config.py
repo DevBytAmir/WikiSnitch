@@ -51,6 +51,7 @@ class Settings(EmbeddingSettings):
     db_name: str
     db_vector_search_depth: int
     data_dir: Path
+    web_origin: str
     llm_ask_base_url: str = ""
     llm_ask_model: str = ""
     llm_ask_api_key: str = dc_field(default="", repr=False)
