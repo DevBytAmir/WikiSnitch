@@ -12,6 +12,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Settings loaded from the environment or `.env` with no defaults in code: a missing value
   stops start-up and is named in the message. Secrets are hidden from `repr`. The database
   connection is always UTC and uses the configured vector search depth.
+- Text cleaning: wikitext and Markdown become headings, paragraphs and list items with
+  citation counts, and each distinct text gets a stable MD5 identity.
 
 ## [0.1.0] - 2026-11-14
 
