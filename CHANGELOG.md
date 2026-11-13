@@ -11,6 +11,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Table creation from `db/schema.sql`, and a test database that is dropped and rebuilt on every
   test run. It refuses to touch any database whose name does not end in `_test`.
+- Dataset download from MariaDB's releases, resumable, with every file checked against its
+  SHA-256 checksum and a corrupt file deleted.
 
 ## [0.2.0] - 2026-11-14
 
