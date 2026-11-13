@@ -1,0 +1,98 @@
+{
+  "mode": "no_answer",
+  "as_of": "2026-10-01T00:00:00Z",
+  "answer": "The Wikipedia articles in this dataset do not appear to cover this question.",
+  "citations": [
+    {
+      "n": 1,
+      "lang": "sv",
+      "page_id": 7001,
+      "para_id": 1,
+      "title": "Testkriget",
+      "text": "Testkriget Sota loi uuden rajan ja se muutti maan tavan, mutta pankit ja yritykset saivat uuden alun kun vero nousi ja ne lait alkoivat elää taas.",
+      "similarity": 0.073,
+      "badge": {
+        "level": "unknown",
+        "label": "No history available",
+        "reasons": []
+      },
+      "wikipedia_url": "https://sv.wikipedia.org/?oldid=701"
+    },
+    {
+      "n": 2,
+      "lang": "fi",
+      "page_id": 9001,
+      "para_id": 2,
+      "title": "Testisota",
+      "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta pankit ja yritykset saivat uuden alun kun vero nousi ja ne lait alkoivat elää taas.",
+      "similarity": 0.065,
+      "badge": {
+        "level": "changed_recently",
+        "label": "Changed April 2026",
+        "reasons": [
+          "Meaning changed on 2026-04-02",
+          "No citations"
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=111"
+    },
+    {
+      "n": 3,
+      "lang": "fi",
+      "page_id": 9001,
+      "para_id": 6,
+      "title": "Testisota",
+      "text": "Muistomerkki paljastettiin kaupungin keskustorilla ja sinne tuodaan edelleen kukkia joka syksy.",
+      "similarity": 0.032,
+      "badge": {
+        "level": "new",
+        "label": "New since August 2026",
+        "reasons": [
+          "No citations"
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=112"
+    },
+    {
+      "n": 4,
+      "lang": "en",
+      "page_id": 8003,
+      "para_id": 1,
+      "title": "No History",
+      "text": "Glaciers carved deep valleys through the northern mountains over many thousands of years.",
+      "similarity": 0.015,
+      "badge": {
+        "level": "unknown",
+        "label": "No history available",
+        "reasons": []
+      },
+      "wikipedia_url": "https://en.wikipedia.org/?oldid=803"
+    },
+    {
+      "n": 5,
+      "lang": "fi",
+      "page_id": 9003,
+      "para_id": 1,
+      "title": "Ilman historiaa",
+      "text": "Tämä artikkeli on kirjoitettu vain nykyisenä versiona, eikä sillä ole muokkaushistoriaa ollenkaan.",
+      "similarity": -0.013,
+      "badge": {
+        "level": "unknown",
+        "label": "No history available",
+        "reasons": []
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=301"
+    }
+  ],
+  "retrieval": {
+    "candidates": 11,
+    "best_similarity": 0.073,
+    "threshold": 0.522
+  },
+  "sql": [
+    {
+      "label": "Nearest current paragraphs",
+      "statement": "SELECT v.distance, p.lang, p.page_id, p.para_id, p.section, p.text, p.rev_id, a.title, a.wikidata_id, s.badge, s.badge_label, s.badge_reasons FROM ( SELECT text_hash, VEC_DISTANCE_COSINE(embedding, VEC_FromText(?)) AS distance FROM text_vector WHERE is_current = 1 ORDER BY distance LIMIT 40 ) v JOIN paragraph p ON p.text_hash = v.text_hash AND p.undone = 0 JOIN article a ON a.lang = p.lang AND a.page_id = p.page_id LEFT JOIN paragraph_signal s ON s.lang = p.lang AND s.page_id = p.page_id AND s.para_id = p.para_id ORDER BY v.distance"
+    }
+  ]
+}

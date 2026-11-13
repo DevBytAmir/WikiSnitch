@@ -1,0 +1,219 @@
+{
+  "paragraph": {
+    "para_id": 5,
+    "section": null,
+    "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan.",
+    "kind": "p",
+    "citations": 0,
+    "has_history": true,
+    "badge": {
+      "level": "disputed",
+      "label": "Disputed",
+      "reasons": [
+        "2 edits by named users were undone in the last 24 months",
+        "No citations"
+      ]
+    }
+  },
+  "metrics": {
+    "first_seen": "2008-08-08T08:08:08Z",
+    "first_author": "Cecilia",
+    "last_substantive_change": "2008-08-08T08:08:08Z",
+    "states": 6,
+    "substantive_changes": 0,
+    "reverted_states": 2,
+    "citations_first_added": null,
+    "total_drift": 0.0
+  },
+  "states": [
+    {
+      "rev_id": 106,
+      "from": "2008-08-08T08:08:08Z",
+      "to": "2010-02-02T00:00:00Z",
+      "user": "Cecilia",
+      "anonymous": false,
+      "comment": "Lääkintä",
+      "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "created",
+        "similarity_to_previous": null,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": []
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=106"
+    },
+    {
+      "rev_id": 108,
+      "from": "2010-02-02T00:10:00Z",
+      "to": "2026-08-10T00:00:00Z",
+      "user": "Aino",
+      "anonymous": false,
+      "comment": "Palautettu",
+      "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "restored",
+        "similarity_to_previous": 1.0,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=108"
+    },
+    {
+      "rev_id": 113,
+      "from": "2026-08-10T00:00:00Z",
+      "to": "2026-08-11T00:00:00Z",
+      "user": "Greta",
+      "anonymous": false,
+      "comment": "Muutos",
+      "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita kenttäsairaaloissa koko talven ajan yksin.",
+      "citations": 0,
+      "reverted": true,
+      "change": {
+        "type": "wording",
+        "similarity_to_previous": null,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita"
+          },
+          {
+            "op": "delete",
+            "text": "sotilaita"
+          },
+          {
+            "op": "equal",
+            "text": "kenttäsairaaloissa koko talven"
+          },
+          {
+            "op": "delete",
+            "text": "ajan."
+          },
+          {
+            "op": "insert",
+            "text": "ajan yksin."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=113"
+    },
+    {
+      "rev_id": 114,
+      "from": "2026-08-11T00:00:00Z",
+      "to": "2026-09-01T00:00:00Z",
+      "user": "Aino",
+      "anonymous": false,
+      "comment": "Palautettu",
+      "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "restored",
+        "similarity_to_previous": 1.0,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=114"
+    },
+    {
+      "rev_id": 115,
+      "from": "2026-09-01T00:00:00Z",
+      "to": "2026-09-02T00:00:00Z",
+      "user": "Greta",
+      "anonymous": false,
+      "comment": "Muutos",
+      "text": "Lääkärit ja sairaanhoitajat hoitivat haavoittuneita sotilaita kenttäsairaaloissa koko vuoden ajan.",
+      "citations": 0,
+      "reverted": true,
+      "change": {
+        "type": "wording",
+        "similarity_to_previous": null,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Lääkärit ja sairaanhoitajat"
+          },
+          {
+            "op": "delete",
+            "text": "auttoivat"
+          },
+          {
+            "op": "insert",
+            "text": "hoitivat"
+          },
+          {
+            "op": "equal",
+            "text": "haavoittuneita sotilaita kenttäsairaaloissa koko"
+          },
+          {
+            "op": "delete",
+            "text": "talven"
+          },
+          {
+            "op": "insert",
+            "text": "vuoden"
+          },
+          {
+            "op": "equal",
+            "text": "ajan."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=115"
+    },
+    {
+      "rev_id": 116,
+      "from": "2026-09-02T00:00:00Z",
+      "to": null,
+      "user": "Aino",
+      "anonymous": false,
+      "comment": "Palautettu",
+      "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "restored",
+        "similarity_to_previous": 1.0,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=116"
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    }
+  ]
+}

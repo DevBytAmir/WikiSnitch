@@ -1,0 +1,124 @@
+{
+  "source": {
+    "para_id": 1,
+    "section": "Tausta",
+    "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 70 000 sotilasta pohjoisen rajan taisteluissa.",
+    "kind": "p",
+    "citations": 0,
+    "has_history": true,
+    "badge": {
+      "level": "stable",
+      "label": "Stable since 2015",
+      "reasons": [
+        "Numbers changed on 2015-06-15: removed 25000, added 70000",
+        "No substantive change since 2015-06-15",
+        "No citations"
+      ]
+    }
+  },
+  "targets": [
+    {
+      "lang": "en",
+      "article": {
+        "page_id": 8001,
+        "title": "Test War",
+        "wikipedia_url": "https://en.wikipedia.org/?oldid=801",
+        "snapshot": "2025-08-01"
+      },
+      "verdict": "same_claim",
+      "matches": [
+        {
+          "para_id": 1,
+          "section": "Test War",
+          "text": "Test War Testisota alkoi vuonna 1939 ja siinä kuoli noin 25,000 sotilasta pohjoisen rajan taisteluissa.",
+          "similarity": 0.832
+        },
+        {
+          "para_id": 2,
+          "section": "Test War",
+          "text": "Merchants shipped timber and iron across the harbour while fishermen mended their nets at dawn.",
+          "similarity": 0.057
+        }
+      ],
+      "number_differences": {
+        "only_in_source": [
+          "70000"
+        ],
+        "only_in_target": [
+          "25000"
+        ]
+      },
+      "assessment": null,
+      "elsewhere": []
+    },
+    {
+      "lang": "sv",
+      "article": {
+        "page_id": 7001,
+        "title": "Testkriget",
+        "wikipedia_url": "https://sv.wikipedia.org/?oldid=701",
+        "snapshot": "2025-08-01"
+      },
+      "verdict": "not_found",
+      "matches": [
+        {
+          "para_id": 1,
+          "section": "Testkriget",
+          "text": "Testkriget Sota loi uuden rajan ja se muutti maan tavan, mutta pankit ja yritykset saivat uuden alun kun vero nousi ja ne lait alkoivat elää taas.",
+          "similarity": 0.167
+        }
+      ],
+      "number_differences": null,
+      "assessment": null,
+      "elsewhere": []
+    }
+  ],
+  "thresholds": {
+    "same_claim": 0.662,
+    "related": 0.439,
+    "calibrated": true
+  },
+  "note": null,
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "The paragraph",
+      "statement": "SELECT p.para_id, p.kind, p.section, p.text, p.text_hash, p.citations, p.numbers, s.badge, s.badge_label, s.badge_reasons FROM paragraph p LEFT JOIN paragraph_signal s ON s.lang = p.lang AND s.page_id = p.page_id AND s.para_id = p.para_id WHERE p.lang = ? AND p.page_id = ? AND p.para_id = ?"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    },
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Stored vector of the paragraph",
+      "statement": "SELECT VEC_ToText(embedding) AS v FROM text_vector WHERE text_hash = ?"
+    },
+    {
+      "label": "Same topic in en",
+      "statement": "SELECT page_id, rev_id, title, date_modified FROM article WHERE wikidata_id = ? AND lang = ? ORDER BY page_id LIMIT 1"
+    },
+    {
+      "label": "Same claim in the counterpart article",
+      "statement": "SELECT p.para_id, p.section, p.text, p.numbers, VEC_DISTANCE_COSINE(v.embedding, VEC_FromText(?)) AS distance FROM paragraph p JOIN text_vector v ON v.text_hash = p.text_hash WHERE p.lang = ? AND p.page_id = ? ORDER BY distance LIMIT 3"
+    },
+    {
+      "label": "Same topic in sv",
+      "statement": "SELECT page_id, rev_id, title, date_modified FROM article WHERE wikidata_id = ? AND lang = ? ORDER BY page_id LIMIT 1"
+    },
+    {
+      "label": "Same claim in the counterpart article",
+      "statement": "SELECT p.para_id, p.section, p.text, p.numbers, VEC_DISTANCE_COSINE(v.embedding, VEC_FromText(?)) AS distance FROM paragraph p JOIN text_vector v ON v.text_hash = p.text_hash WHERE p.lang = ? AND p.page_id = ? ORDER BY distance LIMIT 3"
+    },
+    {
+      "label": "Also covered in other articles",
+      "statement": "SELECT v.distance, p.page_id, p.para_id, p.text, a.title FROM ( SELECT text_hash, VEC_DISTANCE_COSINE(embedding, VEC_FromText(?)) AS distance FROM text_vector WHERE is_current = 1 AND lang = ? ORDER BY distance LIMIT 20 ) v JOIN paragraph p ON p.text_hash = v.text_hash AND p.lang = ? AND p.undone = 0 JOIN article a ON a.lang = p.lang AND a.page_id = p.page_id WHERE p.page_id <> ? ORDER BY v.distance"
+    }
+  ]
+}

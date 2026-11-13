@@ -1,0 +1,30 @@
+{
+  "status": "ok",
+  "snapshot": "2026-10-01T00:00:00Z",
+  "embedder": true,
+  "answer_model": false,
+  "counts": {
+    "articles": 6,
+    "history_articles": 2,
+    "paragraph_states": 25,
+    "vectors": 13
+  },
+  "sql": [
+    {
+      "label": "history_articles",
+      "statement": "SELECT COUNT(*) AS count FROM article_history"
+    },
+    {
+      "label": "paragraph_states",
+      "statement": "SELECT COUNT(*) AS count FROM paragraph FOR SYSTEM_TIME ALL"
+    },
+    {
+      "label": "articles",
+      "statement": "SELECT COUNT(*) AS count FROM article"
+    },
+    {
+      "label": "vectors",
+      "statement": "SELECT COUNT(*) AS count FROM text_vector"
+    }
+  ]
+}

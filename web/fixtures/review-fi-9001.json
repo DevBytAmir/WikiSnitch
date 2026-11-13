@@ -1,0 +1,143 @@
+{
+  "needs_attention": [
+    {
+      "paragraph": {
+        "para_id": 2,
+        "section": "Tausta",
+        "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta pankit ja yritykset saivat uuden alun kun vero nousi ja ne lait alkoivat elää taas.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "changed_recently",
+          "label": "Changed April 2026",
+          "reasons": [
+            "Meaning changed on 2026-04-02",
+            "No citations"
+          ]
+        }
+      },
+      "reasons": [
+        {
+          "code": "meaning_changed_recently",
+          "detail": "Meaning changed on 2026-04-02"
+        },
+        {
+          "code": "unsourced",
+          "detail": "No citations"
+        }
+      ],
+      "score": 0.55
+    },
+    {
+      "paragraph": {
+        "para_id": 5,
+        "section": null,
+        "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "disputed",
+          "label": "Disputed",
+          "reasons": [
+            "2 edits by named users were undone in the last 24 months",
+            "No citations"
+          ]
+        }
+      },
+      "reasons": [
+        {
+          "code": "disputed",
+          "detail": "2 edits by named users were undone in the last 24 months"
+        },
+        {
+          "code": "unsourced",
+          "detail": "No citations"
+        }
+      ],
+      "score": 0.45
+    },
+    {
+      "paragraph": {
+        "para_id": 1,
+        "section": "Tausta",
+        "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 70 000 sotilasta pohjoisen rajan taisteluissa.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "stable",
+          "label": "Stable since 2015",
+          "reasons": [
+            "Numbers changed on 2015-06-15: removed 25000, added 70000",
+            "No substantive change since 2015-06-15",
+            "No citations"
+          ]
+        }
+      },
+      "reasons": [
+        {
+          "code": "unsourced",
+          "detail": "No citations"
+        },
+        {
+          "code": "differs_from_en",
+          "detail": "Numbers differ from the English article: here 70000; there 25000"
+        }
+      ],
+      "score": 0.3
+    },
+    {
+      "paragraph": {
+        "para_id": 6,
+        "section": "Seuraukset",
+        "text": "Muistomerkki paljastettiin kaupungin keskustorilla ja sinne tuodaan edelleen kukkia joka syksy.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "new",
+          "label": "New since August 2026",
+          "reasons": [
+            "No citations"
+          ]
+        }
+      },
+      "reasons": [
+        {
+          "code": "unsourced",
+          "detail": "No citations"
+        }
+      ],
+      "score": 0.15
+    }
+  ],
+  "missing_here": [
+    {
+      "lang": "en",
+      "para_id": 2,
+      "section": "Test War",
+      "text": "Merchants shipped timber and iron across the harbour while fishermen mended their nets at dawn.",
+      "nearest_similarity": 0.117
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    },
+    {
+      "label": "Paragraphs needing attention",
+      "statement": "SELECT s.para_id, s.badge, s.badge_label, s.badge_reasons, s.review_reasons, s.attention, p.kind, p.section, p.text, p.citations FROM paragraph_signal s JOIN paragraph p ON p.lang = s.lang AND p.page_id = s.page_id AND p.para_id = s.para_id WHERE s.lang = ? AND s.page_id = ? AND s.attention > 0 ORDER BY s.attention DESC, s.para_id ASC"
+    },
+    {
+      "label": "Counterpart paragraphs with no match here",
+      "statement": "SELECT g.lang, g.para_id, g.nearest_similarity, p.section, p.text FROM coverage_gap g JOIN paragraph p ON p.lang = g.lang AND p.page_id = g.page_id AND p.para_id = g.para_id WHERE g.fi_page_id = ? ORDER BY g.nearest_similarity ASC, g.lang, g.para_id LIMIT ?"
+    }
+  ]
+}

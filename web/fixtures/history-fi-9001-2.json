@@ -1,0 +1,215 @@
+{
+  "paragraph": {
+    "para_id": 2,
+    "section": "Tausta",
+    "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta pankit ja yritykset saivat uuden alun kun vero nousi ja ne lait alkoivat elää taas.",
+    "kind": "p",
+    "citations": 0,
+    "has_history": true,
+    "badge": {
+      "level": "changed_recently",
+      "label": "Changed April 2026",
+      "reasons": [
+        "Meaning changed on 2026-04-02",
+        "No citations"
+      ]
+    }
+  },
+  "metrics": {
+    "first_seen": "2005-03-01T10:00:00Z",
+    "first_author": "Aino",
+    "last_substantive_change": "2026-04-02T00:00:00Z",
+    "states": 5,
+    "substantive_changes": 1,
+    "reverted_states": 0,
+    "citations_first_added": null,
+    "total_drift": 0.214
+  },
+  "states": [
+    {
+      "rev_id": 101,
+      "from": "2005-03-01T10:00:00Z",
+      "to": "2006-05-02T12:00:00Z",
+      "user": "Aino",
+      "anonymous": false,
+      "comment": "Uusi artikkeli",
+      "text": "Sota loi uuden rajan ja se muutti maan tavat, mutta työ ja kauppa saivat uuden alun kun rauha tuli ja ne kylät alkoivat elää taas.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "created",
+        "similarity_to_previous": null,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": []
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=101"
+    },
+    {
+      "rev_id": 102,
+      "from": "2006-05-02T12:00:00Z",
+      "to": "2007-01-10T09:00:00Z",
+      "user": "Björn",
+      "anonymous": false,
+      "comment": "Sanamuoto",
+      "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta työ ja kauppa saivat uuden alun kun rauha tuli ja ne kylät alkoivat elää taas.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "wording",
+        "similarity_to_previous": 0.966,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Sota loi uuden rajan ja se muutti maan"
+          },
+          {
+            "op": "delete",
+            "text": "tavat,"
+          },
+          {
+            "op": "insert",
+            "text": "tavan,"
+          },
+          {
+            "op": "equal",
+            "text": "mutta työ ja kauppa saivat uuden alun kun rauha tuli ja ne kylät alkoivat elää taas."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=102"
+    },
+    {
+      "rev_id": 104,
+      "from": "2007-01-10T09:05:00Z",
+      "to": "2010-02-02T00:00:00Z",
+      "user": "Aino",
+      "anonymous": false,
+      "comment": "Palautettu",
+      "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta työ ja kauppa saivat uuden alun kun rauha tuli ja ne kylät alkoivat elää taas.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "restored",
+        "similarity_to_previous": 1.0,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta työ ja kauppa saivat uuden alun kun rauha tuli ja ne kylät alkoivat elää taas."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=104"
+    },
+    {
+      "rev_id": 108,
+      "from": "2010-02-02T00:10:00Z",
+      "to": "2026-04-02T00:00:00Z",
+      "user": "Aino",
+      "anonymous": false,
+      "comment": "Palautettu",
+      "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta työ ja kauppa saivat uuden alun kun rauha tuli ja ne kylät alkoivat elää taas.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "restored",
+        "similarity_to_previous": 1.0,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta työ ja kauppa saivat uuden alun kun rauha tuli ja ne kylät alkoivat elää taas."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=108"
+    },
+    {
+      "rev_id": 111,
+      "from": "2026-04-02T00:00:00Z",
+      "to": null,
+      "user": "Eeva",
+      "anonymous": false,
+      "comment": "Tarkennus",
+      "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta pankit ja yritykset saivat uuden alun kun vero nousi ja ne lait alkoivat elää taas.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "meaning",
+        "similarity_to_previous": 0.822,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta"
+          },
+          {
+            "op": "delete",
+            "text": "työ"
+          },
+          {
+            "op": "insert",
+            "text": "pankit"
+          },
+          {
+            "op": "equal",
+            "text": "ja"
+          },
+          {
+            "op": "delete",
+            "text": "kauppa"
+          },
+          {
+            "op": "insert",
+            "text": "yritykset"
+          },
+          {
+            "op": "equal",
+            "text": "saivat uuden alun kun"
+          },
+          {
+            "op": "delete",
+            "text": "rauha tuli"
+          },
+          {
+            "op": "insert",
+            "text": "vero nousi"
+          },
+          {
+            "op": "equal",
+            "text": "ja ne"
+          },
+          {
+            "op": "delete",
+            "text": "kylät"
+          },
+          {
+            "op": "insert",
+            "text": "lait"
+          },
+          {
+            "op": "equal",
+            "text": "alkoivat elää taas."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=111"
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    }
+  ]
+}

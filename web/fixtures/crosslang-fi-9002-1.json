@@ -1,0 +1,70 @@
+{
+  "source": {
+    "para_id": 1,
+    "section": null,
+    "text": "Lyhyt artikkeli kertoo vain yhden pienen asian tässä kohdassa.",
+    "kind": "p",
+    "citations": 0,
+    "has_history": true,
+    "badge": {
+      "level": "stable",
+      "label": "Stable since 2012",
+      "reasons": [
+        "No substantive change since 2012-01-01",
+        "No citations"
+      ]
+    }
+  },
+  "targets": [
+    {
+      "lang": "en",
+      "article": null,
+      "verdict": "no_article",
+      "matches": [],
+      "number_differences": null,
+      "assessment": null,
+      "elsewhere": []
+    },
+    {
+      "lang": "sv",
+      "article": null,
+      "verdict": "no_article",
+      "matches": [],
+      "number_differences": null,
+      "assessment": null,
+      "elsewhere": []
+    }
+  ],
+  "thresholds": {
+    "same_claim": 0.662,
+    "related": 0.439,
+    "calibrated": true
+  },
+  "note": "This paragraph is too short to compare.",
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "The paragraph",
+      "statement": "SELECT p.para_id, p.kind, p.section, p.text, p.text_hash, p.citations, p.numbers, s.badge, s.badge_label, s.badge_reasons FROM paragraph p LEFT JOIN paragraph_signal s ON s.lang = p.lang AND s.page_id = p.page_id AND s.para_id = p.para_id WHERE p.lang = ? AND p.page_id = ? AND p.para_id = ?"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    },
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Same topic in en",
+      "statement": "SELECT page_id, rev_id, title, date_modified FROM article WHERE wikidata_id = ? AND lang = ? ORDER BY page_id LIMIT 1"
+    },
+    {
+      "label": "Same topic in sv",
+      "statement": "SELECT page_id, rev_id, title, date_modified FROM article WHERE wikidata_id = ? AND lang = ? ORDER BY page_id LIMIT 1"
+    }
+  ]
+}

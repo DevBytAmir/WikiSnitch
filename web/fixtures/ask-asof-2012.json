@@ -1,0 +1,44 @@
+{
+  "mode": "generated",
+  "as_of": "2012-01-01T00:00:00Z",
+  "answer": "Sota alkoi 1939 [1].",
+  "citations": [
+    {
+      "n": 1,
+      "lang": "fi",
+      "page_id": 9001,
+      "para_id": 1,
+      "title": "Testisota",
+      "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 25 000 sotilasta pohjoisen rajan taisteluissa.",
+      "similarity": 0.902,
+      "badge": {
+        "level": "stable",
+        "label": "Stable since 2005",
+        "reasons": [
+          "No substantive change since 2005-03-01",
+          "No citations"
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=108"
+    }
+  ],
+  "retrieval": {
+    "candidates": 4,
+    "best_similarity": 0.902,
+    "threshold": 0.522
+  },
+  "sql": [
+    {
+      "label": "Nearest paragraphs as they stood then",
+      "statement": "SELECT v.distance, p.lang, p.page_id, p.para_id, p.section, p.text, p.rev_id, a.title, a.wikidata_id FROM ( SELECT text_hash, VEC_DISTANCE_COSINE(embedding, VEC_FromText(?)) AS distance FROM text_vector WHERE lang = 'fi' ORDER BY distance LIMIT 200 ) v JOIN paragraph FOR SYSTEM_TIME AS OF TIMESTAMP ? AS p ON p.text_hash = v.text_hash AND p.lang = 'fi' AND p.undone = 0 JOIN article a ON a.lang = p.lang AND a.page_id = p.page_id ORDER BY v.distance"
+    },
+    {
+      "label": "llm cache lookup",
+      "statement": "SELECT response FROM llm_cache WHERE cache_key = ?"
+    },
+    {
+      "label": "llm cache store",
+      "statement": "INSERT IGNORE INTO llm_cache (cache_key, kind, model, response, created) VALUES (?,?,?,?,UTC_TIMESTAMP())"
+    }
+  ]
+}

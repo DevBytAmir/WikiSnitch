@@ -7,6 +7,12 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- Web app project (React, TypeScript, Vite) with a typed client for every endpoint of the API, and
+  a fixture mode that serves real exported responses from `web/fixtures`, so the interface can be
+  built and tested without the API running.
+
 ## [0.5.0] - 2026-11-14
 
 ### Added

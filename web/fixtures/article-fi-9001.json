@@ -1,0 +1,176 @@
+{
+  "article": {
+    "lang": "fi",
+    "page_id": 9001,
+    "title": "Testisota",
+    "wikidata_id": "Q9001",
+    "rev_id": 116,
+    "as_of": "2026-10-01T00:00:00Z",
+    "saved_at": "2026-09-02T00:00:00Z",
+    "saved_by": "Aino",
+    "wikipedia_url": "https://fi.wikipedia.org/?oldid=116",
+    "has_history": true,
+    "first_version": "2005-03-01T10:00:00Z",
+    "languages": [
+      {
+        "lang": "en",
+        "page_id": 8001,
+        "title": "Test War"
+      },
+      {
+        "lang": "sv",
+        "page_id": 7001,
+        "title": "Testkriget"
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 5,
+        "section": null,
+        "text": "Lääkärit ja sairaanhoitajat auttoivat haavoittuneita sotilaita kenttäsairaaloissa koko talven ajan.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "disputed",
+          "label": "Disputed",
+          "reasons": [
+            "2 edits by named users were undone in the last 24 months",
+            "No citations"
+          ]
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "text": "Tausta"
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 1,
+        "section": "Tausta",
+        "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 70 000 sotilasta pohjoisen rajan taisteluissa.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "stable",
+          "label": "Stable since 2015",
+          "reasons": [
+            "Numbers changed on 2015-06-15: removed 25000, added 70000",
+            "No substantive change since 2015-06-15",
+            "No citations"
+          ]
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 2,
+        "section": "Tausta",
+        "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta pankit ja yritykset saivat uuden alun kun vero nousi ja ne lait alkoivat elää taas.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "changed_recently",
+          "label": "Changed April 2026",
+          "reasons": [
+            "Meaning changed on 2026-04-02",
+            "No citations"
+          ]
+        }
+      }
+    },
+    {
+      "type": "heading",
+      "text": "Seuraukset"
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 4,
+        "section": "Seuraukset",
+        "text": "Rauhansopimus allekirjoitettiin keväällä ja sen ehdot julkaistiin kaikissa suurimmissa päivälehdissä.",
+        "kind": "p",
+        "citations": 1,
+        "has_history": true,
+        "badge": {
+          "level": "stable",
+          "label": "Stable since 2008",
+          "reasons": [
+            "No substantive change since 2008-08-08",
+            "1 citation"
+          ]
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 6,
+        "section": "Seuraukset",
+        "text": "Muistomerkki paljastettiin kaupungin keskustorilla ja sinne tuodaan edelleen kukkia joka syksy.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "new",
+          "label": "New since August 2026",
+          "reasons": [
+            "No citations"
+          ]
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 7,
+        "section": "Seuraukset",
+        "text": "Rauhansopimus allekirjoitettiin keväällä ja sen ehdot julkaistiin kaikissa suurimmissa päivälehdissä.",
+        "kind": "p",
+        "citations": 1,
+        "has_history": true,
+        "badge": {
+          "level": "new",
+          "label": "New since August 2026",
+          "reasons": [
+            "1 citation"
+          ]
+        }
+      }
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Same topic in other languages",
+      "statement": "SELECT wikidata_id, lang, page_id, title FROM article WHERE wikidata_id IN (?) ORDER BY lang, page_id"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    },
+    {
+      "label": "Current version",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    },
+    {
+      "label": "Version span",
+      "statement": "SELECT COUNT(*) AS versions, MIN(row_start) AS first_version FROM article_history FOR SYSTEM_TIME ALL WHERE page_id = ?"
+    },
+    {
+      "label": "Reading order and paragraphs",
+      "statement": "SELECT o.pos, o.heading, o.para_id, p.kind, p.section, p.text, p.citations, s.badge, s.badge_label, s.badge_reasons FROM article_outline o LEFT JOIN paragraph p ON p.lang = o.lang AND p.page_id = o.page_id AND p.para_id = o.para_id LEFT JOIN paragraph_signal s ON s.lang = o.lang AND s.page_id = o.page_id AND s.para_id = o.para_id WHERE o.lang = ? AND o.page_id = ? ORDER BY o.pos"
+    }
+  ]
+}

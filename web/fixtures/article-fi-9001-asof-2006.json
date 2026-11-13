@@ -1,0 +1,101 @@
+{
+  "article": {
+    "lang": "fi",
+    "page_id": 9001,
+    "title": "Testisota",
+    "wikidata_id": "Q9001",
+    "rev_id": 102,
+    "as_of": "2006-06-01T00:00:00Z",
+    "saved_at": "2006-05-02T12:00:00Z",
+    "saved_by": "Björn",
+    "wikipedia_url": "https://fi.wikipedia.org/?oldid=102",
+    "has_history": true,
+    "first_version": null,
+    "languages": [
+      {
+        "lang": "en",
+        "page_id": 8001,
+        "title": "Test War"
+      },
+      {
+        "lang": "sv",
+        "page_id": 7001,
+        "title": "Testkriget"
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "Tausta"
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 1,
+        "section": "Tausta",
+        "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 25 000 sotilasta pohjoisen rajan taisteluissa.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "stable",
+          "label": "Stable since 2005",
+          "reasons": [
+            "No substantive change since 2005-03-01",
+            "No citations"
+          ]
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 2,
+        "section": "Tausta",
+        "text": "Sota loi uuden rajan ja se muutti maan tavan, mutta työ ja kauppa saivat uuden alun kun rauha tuli ja ne kylät alkoivat elää taas.",
+        "kind": "p",
+        "citations": 0,
+        "has_history": true,
+        "badge": {
+          "level": "stable",
+          "label": "Stable since 2005",
+          "reasons": [
+            "No substantive change since 2005-03-01",
+            "No citations"
+          ]
+        }
+      }
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Same topic in other languages",
+      "statement": "SELECT wikidata_id, lang, page_id, title FROM article WHERE wikidata_id IN (?) ORDER BY lang, page_id"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    },
+    {
+      "label": "Version of the article at that moment",
+      "statement": "SELECT rev_id, user, text, row_start AS saved_at FROM article_history FOR SYSTEM_TIME AS OF TIMESTAMP ? WHERE page_id = ?"
+    },
+    {
+      "label": "Paragraphs at that moment",
+      "statement": "SELECT para_id, text_hash, kind, section, citations FROM paragraph FOR SYSTEM_TIME AS OF TIMESTAMP ? WHERE lang = 'fi' AND page_id = ?"
+    },
+    {
+      "label": "Paragraph states of the article",
+      "statement": "SELECT para_id, kind, section, text, text_hash, citations, numbers, rev_id, user, anonymous, comment, undone, row_start, row_end FROM paragraph FOR SYSTEM_TIME ALL WHERE lang = 'fi' AND page_id = ? ORDER BY para_id, row_start"
+    },
+    {
+      "label": "Stored vectors of those texts",
+      "statement": "SELECT text_hash, VEC_ToText(embedding) AS v FROM text_vector WHERE text_hash IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    }
+  ]
+}

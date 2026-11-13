@@ -1,0 +1,62 @@
+{
+  "article": {
+    "lang": "fi",
+    "page_id": 9003,
+    "title": "Ilman historiaa",
+    "wikidata_id": "Q9003",
+    "rev_id": 301,
+    "as_of": "2025-08-01T00:00:00Z",
+    "saved_at": "2025-08-01T00:00:00Z",
+    "saved_by": null,
+    "wikipedia_url": "https://fi.wikipedia.org/?oldid=301",
+    "has_history": false,
+    "first_version": null,
+    "languages": [
+      {
+        "lang": "en",
+        "page_id": 8003,
+        "title": "No History"
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "Ilman historiaa"
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 1,
+        "section": "Ilman historiaa",
+        "text": "Tämä artikkeli on kirjoitettu vain nykyisenä versiona, eikä sillä ole muokkaushistoriaa ollenkaan.",
+        "kind": "p",
+        "citations": null,
+        "has_history": false,
+        "badge": {
+          "level": "unknown",
+          "label": "No history available",
+          "reasons": []
+        }
+      }
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Same topic in other languages",
+      "statement": "SELECT wikidata_id, lang, page_id, title FROM article WHERE wikidata_id IN (?) ORDER BY lang, page_id"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    },
+    {
+      "label": "Reading order and paragraphs",
+      "statement": "SELECT o.pos, o.heading, o.para_id, p.kind, p.section, p.text, p.citations, s.badge, s.badge_label, s.badge_reasons FROM article_outline o LEFT JOIN paragraph p ON p.lang = o.lang AND p.page_id = o.page_id AND p.para_id = o.para_id LEFT JOIN paragraph_signal s ON s.lang = o.lang AND s.page_id = o.page_id AND s.para_id = o.para_id WHERE o.lang = ? AND o.page_id = ? ORDER BY o.pos"
+    }
+  ]
+}

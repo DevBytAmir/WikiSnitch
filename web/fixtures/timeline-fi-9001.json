@@ -1,0 +1,88 @@
+{
+  "months": [
+    {
+      "month": "2005-03",
+      "edits": 1,
+      "reverts": 0,
+      "reverts_of_anonymous": 0
+    },
+    {
+      "month": "2006-05",
+      "edits": 1,
+      "reverts": 0,
+      "reverts_of_anonymous": 0
+    },
+    {
+      "month": "2007-01",
+      "edits": 2,
+      "reverts": 1,
+      "reverts_of_anonymous": 1
+    },
+    {
+      "month": "2008-08",
+      "edits": 2,
+      "reverts": 0,
+      "reverts_of_anonymous": 0
+    },
+    {
+      "month": "2010-02",
+      "edits": 2,
+      "reverts": 1,
+      "reverts_of_anonymous": 0
+    },
+    {
+      "month": "2015-06",
+      "edits": 1,
+      "reverts": 0,
+      "reverts_of_anonymous": 0
+    },
+    {
+      "month": "2020-01",
+      "edits": 1,
+      "reverts": 0,
+      "reverts_of_anonymous": 0
+    },
+    {
+      "month": "2026-04",
+      "edits": 1,
+      "reverts": 0,
+      "reverts_of_anonymous": 0
+    },
+    {
+      "month": "2026-08",
+      "edits": 3,
+      "reverts": 1,
+      "reverts_of_anonymous": 0
+    },
+    {
+      "month": "2026-09",
+      "edits": 2,
+      "reverts": 1,
+      "reverts_of_anonymous": 0
+    }
+  ],
+  "totals": {
+    "versions": 16,
+    "reverts": 4,
+    "first": "2005-03-01",
+    "last": "2026-09-02"
+  },
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    },
+    {
+      "label": "Edits and reverts per month",
+      "statement": "SELECT DATE_FORMAT(row_start, '%Y-%m') AS month, COUNT(*) AS edits, SUM(is_revert) AS reverts, SUM(is_revert AND undid_anonymous) AS reverts_of_anonymous FROM ( SELECT row_start, COALESCE((sha1 <> LAG(sha1) OVER (ORDER BY row_start) AND MIN(row_start) OVER (PARTITION BY sha1) < row_start), 0) AS is_revert, COALESCE(LAG(anonymous) OVER (ORDER BY row_start), 0) AS undid_anonymous FROM article_history FOR SYSTEM_TIME ALL WHERE page_id = ? ) AS versions GROUP BY month ORDER BY month"
+    },
+    {
+      "label": "First and last version",
+      "statement": "SELECT MIN(row_start) AS first_version, MAX(row_start) AS last_version FROM article_history FOR SYSTEM_TIME ALL WHERE page_id = ?"
+    }
+  ]
+}

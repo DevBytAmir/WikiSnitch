@@ -1,0 +1,79 @@
+{
+  "article": {
+    "lang": "en",
+    "page_id": 8001,
+    "title": "Test War",
+    "wikidata_id": "Q9001",
+    "rev_id": 801,
+    "as_of": "2025-08-01T00:00:00Z",
+    "saved_at": "2025-08-01T00:00:00Z",
+    "saved_by": null,
+    "wikipedia_url": "https://en.wikipedia.org/?oldid=801",
+    "has_history": false,
+    "first_version": null,
+    "languages": [
+      {
+        "lang": "fi",
+        "page_id": 9001,
+        "title": "Testisota"
+      },
+      {
+        "lang": "sv",
+        "page_id": 7001,
+        "title": "Testkriget"
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "text": "Test War"
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 1,
+        "section": "Test War",
+        "text": "Test War Testisota alkoi vuonna 1939 ja siinä kuoli noin 25,000 sotilasta pohjoisen rajan taisteluissa.",
+        "kind": "p",
+        "citations": null,
+        "has_history": false,
+        "badge": {
+          "level": "unknown",
+          "label": "No history available",
+          "reasons": []
+        }
+      }
+    },
+    {
+      "type": "paragraph",
+      "paragraph": {
+        "para_id": 2,
+        "section": "Test War",
+        "text": "Merchants shipped timber and iron across the harbour while fishermen mended their nets at dawn.",
+        "kind": "p",
+        "citations": null,
+        "has_history": false,
+        "badge": {
+          "level": "unknown",
+          "label": "No history available",
+          "reasons": []
+        }
+      }
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Same topic in other languages",
+      "statement": "SELECT wikidata_id, lang, page_id, title FROM article WHERE wikidata_id IN (?) ORDER BY lang, page_id"
+    },
+    {
+      "label": "Reading order and paragraphs",
+      "statement": "SELECT o.pos, o.heading, o.para_id, p.kind, p.section, p.text, p.citations, s.badge, s.badge_label, s.badge_reasons FROM article_outline o LEFT JOIN paragraph p ON p.lang = o.lang AND p.page_id = o.page_id AND p.para_id = o.para_id LEFT JOIN paragraph_signal s ON s.lang = o.lang AND s.page_id = o.page_id AND s.para_id = o.para_id WHERE o.lang = ? AND o.page_id = ? ORDER BY o.pos"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "paragraph": {
+    "para_id": 3,
+    "section": null,
+    "text": "Tässä on aivan toisenlaista roskaa ilman mitään sisältöä, eikä tämä liity artikkelin aiheeseen mitenkään.",
+    "kind": "p",
+    "citations": 0,
+    "has_history": true,
+    "badge": {
+      "level": "unknown",
+      "label": "No history available",
+      "reasons": []
+    }
+  },
+  "metrics": {
+    "first_seen": "2007-01-10T09:00:00Z",
+    "first_author": "192.0.2.7",
+    "last_substantive_change": "2007-01-10T09:00:00Z",
+    "states": 1,
+    "substantive_changes": 0,
+    "reverted_states": 1,
+    "citations_first_added": null,
+    "total_drift": null
+  },
+  "states": [
+    {
+      "rev_id": 103,
+      "from": "2007-01-10T09:00:00Z",
+      "to": "2007-01-10T09:05:00Z",
+      "user": "192.0.2.7",
+      "anonymous": true,
+      "comment": "Roskaa",
+      "text": "Tässä on aivan toisenlaista roskaa ilman mitään sisältöä, eikä tämä liity artikkelin aiheeseen mitenkään.",
+      "citations": 0,
+      "reverted": true,
+      "change": {
+        "type": "wording",
+        "similarity_to_previous": null,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": []
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=103"
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    }
+  ]
+}

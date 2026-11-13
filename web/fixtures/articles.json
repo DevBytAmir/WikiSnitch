@@ -1,0 +1,117 @@
+{
+  "articles": [
+    {
+      "lang": "fi",
+      "page_id": 9002,
+      "title": "Lyhyt artikkeli",
+      "wikidata_id": "Q9002",
+      "has_history": true,
+      "versions": 1,
+      "languages": []
+    },
+    {
+      "lang": "fi",
+      "page_id": 9001,
+      "title": "Testisota",
+      "wikidata_id": "Q9001",
+      "has_history": true,
+      "versions": 16,
+      "languages": [
+        {
+          "lang": "en",
+          "page_id": 8001,
+          "title": "Test War"
+        },
+        {
+          "lang": "sv",
+          "page_id": 7001,
+          "title": "Testkriget"
+        }
+      ]
+    },
+    {
+      "lang": "fi",
+      "page_id": 9003,
+      "title": "Ilman historiaa",
+      "wikidata_id": "Q9003",
+      "has_history": false,
+      "versions": null,
+      "languages": [
+        {
+          "lang": "en",
+          "page_id": 8003,
+          "title": "No History"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "page_id": 8003,
+      "title": "No History",
+      "wikidata_id": "Q9003",
+      "has_history": false,
+      "versions": null,
+      "languages": [
+        {
+          "lang": "fi",
+          "page_id": 9003,
+          "title": "Ilman historiaa"
+        }
+      ]
+    },
+    {
+      "lang": "en",
+      "page_id": 8001,
+      "title": "Test War",
+      "wikidata_id": "Q9001",
+      "has_history": false,
+      "versions": null,
+      "languages": [
+        {
+          "lang": "fi",
+          "page_id": 9001,
+          "title": "Testisota"
+        },
+        {
+          "lang": "sv",
+          "page_id": 7001,
+          "title": "Testkriget"
+        }
+      ]
+    },
+    {
+      "lang": "sv",
+      "page_id": 7001,
+      "title": "Testkriget",
+      "wikidata_id": "Q9001",
+      "has_history": false,
+      "versions": null,
+      "languages": [
+        {
+          "lang": "en",
+          "page_id": 8001,
+          "title": "Test War"
+        },
+        {
+          "lang": "fi",
+          "page_id": 9001,
+          "title": "Testisota"
+        }
+      ]
+    }
+  ],
+  "sql": [
+    {
+      "label": "Articles, history first",
+      "statement": "SELECT a.lang, a.page_id, a.title, a.wikidata_id, (h.page_id IS NOT NULL) AS has_history FROM article a LEFT JOIN article_history h ON a.lang = 'fi' AND h.page_id = a.page_id WHERE ? = 0 OR h.page_id IS NOT NULL ORDER BY has_history DESC, a.title LIMIT ?"
+    },
+    {
+      "label": "Versions per article",
+      "statement": "SELECT page_id, COUNT(*) AS versions FROM article_history FOR SYSTEM_TIME ALL WHERE page_id IN (?, ?) GROUP BY page_id"
+    },
+    {
+      "label": "Same topic in other languages",
+      "statement": "SELECT wikidata_id, lang, page_id, title FROM article WHERE wikidata_id IN (?, ?, ?) ORDER BY lang, page_id"
+    }
+  ]
+}

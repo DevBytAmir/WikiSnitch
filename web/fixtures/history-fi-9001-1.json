@@ -1,0 +1,124 @@
+{
+  "paragraph": {
+    "para_id": 1,
+    "section": "Tausta",
+    "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 70 000 sotilasta pohjoisen rajan taisteluissa.",
+    "kind": "p",
+    "citations": 0,
+    "has_history": true,
+    "badge": {
+      "level": "stable",
+      "label": "Stable since 2015",
+      "reasons": [
+        "Numbers changed on 2015-06-15: removed 25000, added 70000",
+        "No substantive change since 2015-06-15",
+        "No citations"
+      ]
+    }
+  },
+  "metrics": {
+    "first_seen": "2005-03-01T10:00:00Z",
+    "first_author": "Aino",
+    "last_substantive_change": "2015-06-15T00:00:00Z",
+    "states": 3,
+    "substantive_changes": 1,
+    "reverted_states": 0,
+    "citations_first_added": null,
+    "total_drift": 0.063
+  },
+  "states": [
+    {
+      "rev_id": 101,
+      "from": "2005-03-01T10:00:00Z",
+      "to": "2010-02-02T00:00:00Z",
+      "user": "Aino",
+      "anonymous": false,
+      "comment": "Uusi artikkeli",
+      "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 25 000 sotilasta pohjoisen rajan taisteluissa.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "created",
+        "similarity_to_previous": null,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": []
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=101"
+    },
+    {
+      "rev_id": 108,
+      "from": "2010-02-02T00:10:00Z",
+      "to": "2015-06-15T00:00:00Z",
+      "user": "Aino",
+      "anonymous": false,
+      "comment": "Palautettu",
+      "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 25 000 sotilasta pohjoisen rajan taisteluissa.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "restored",
+        "similarity_to_previous": 1.0,
+        "numbers_added": [],
+        "numbers_removed": [],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 25 000 sotilasta pohjoisen rajan taisteluissa."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=108"
+    },
+    {
+      "rev_id": 109,
+      "from": "2015-06-15T00:00:00Z",
+      "to": null,
+      "user": "Daavid",
+      "anonymous": false,
+      "comment": "Luvut",
+      "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin 70 000 sotilasta pohjoisen rajan taisteluissa.",
+      "citations": 0,
+      "reverted": false,
+      "change": {
+        "type": "numbers",
+        "similarity_to_previous": 0.937,
+        "numbers_added": [
+          "70000"
+        ],
+        "numbers_removed": [
+          "25000"
+        ],
+        "diff": [
+          {
+            "op": "equal",
+            "text": "Testisota alkoi vuonna 1939 ja siinä kuoli noin"
+          },
+          {
+            "op": "delete",
+            "text": "25"
+          },
+          {
+            "op": "insert",
+            "text": "70"
+          },
+          {
+            "op": "equal",
+            "text": "000 sotilasta pohjoisen rajan taisteluissa."
+          }
+        ]
+      },
+      "wikipedia_url": "https://fi.wikipedia.org/?oldid=109"
+    }
+  ],
+  "sql": [
+    {
+      "label": "The article",
+      "statement": "SELECT lang, page_id, rev_id, wikidata_id, title, date_modified FROM article WHERE lang = ? AND page_id = ?"
+    },
+    {
+      "label": "Has history",
+      "statement": "SELECT rev_id, user, row_start AS saved_at FROM article_history WHERE page_id = ?"
+    }
+  ]
+}
