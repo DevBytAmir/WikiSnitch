@@ -7,6 +7,11 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- Scripts that measure the datasets (versions per article, distinct paragraphs, overlap
+  between languages, paragraph sizes) and so size the embedding job, with how to run them.
+
 ## [0.4.0] - 2026-11-14
 
 ### Added
