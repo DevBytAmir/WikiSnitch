@@ -30,6 +30,12 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Pages: the article list with search and sorting kept in the address (so Back returns to the same
   list), the article reader with the time machine and the paragraph panel, a date comparison
   mode, and the review queue for editors with the paragraphs that need attention.
+- The Ask page: a question in Finnish, Swedish or English with an optional language and date,
+  shown as the four steps of answering (read the question, search the archive, pick the evidence,
+  write with citations) followed by the answer with
+  numbered citations, each with its trust badge and a link to the article version. Without a
+  model the closest passages are shown, and when nothing is close enough it says so. With a past
+  date it shows what changed in the evidence between then and today.
 
 ## [0.5.0] - 2026-11-14
 
