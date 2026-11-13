@@ -16,6 +16,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   citation counts, and each distinct text gets a stable MD5 identity.
 - Number extraction: years and figures are normalised so that `25 000`, `25,000` and `25000`
   compare equal, and two texts can be compared by the numbers that differ.
+- Embedders chosen by configuration: Ollama, any OpenAI-compatible embeddings API (hosted or
+  local) or a deterministic fake for tests. Vectors are checked against the configured
+  dimensions. Cosine similarity and conversion to and from the database vector format.
 
 ## [0.1.0] - 2026-11-14
 
