@@ -7,6 +7,7 @@ setup:
 	@test -f .env || { cp .env.example .env; echo "created .env from .env.example"; }
 	$(COMPOSE) up -d --wait
 	uv sync
+	uv run python -m pipeline.create_tables
 
 test:
 	uv run ruff check .

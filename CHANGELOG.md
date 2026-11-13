@@ -7,6 +7,11 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- Table creation from `db/schema.sql`, and a test database that is dropped and rebuilt on every
+  test run. It refuses to touch any database whose name does not end in `_test`.
+
 ## [0.2.0] - 2026-11-14
 
 ### Added
