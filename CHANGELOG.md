@@ -27,6 +27,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - "Show SQL" drawer on every screen with the statements behind what is shown, a data menu to
   download what is on screen, and a help page that lists what can be done and explains badges,
   similarity, undone edits and where the data comes from, with small interactive examples.
+- Pages: the article list with search and sorting kept in the address (so Back returns to the same
+  list), the article reader with the time machine and the paragraph panel, a date comparison
+  mode, and the review queue for editors with the paragraphs that need attention.
 
 ## [0.5.0] - 2026-11-14
 
