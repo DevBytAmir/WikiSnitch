@@ -19,6 +19,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Embedders chosen by configuration: Ollama, any OpenAI-compatible embeddings API (hosted or
   local) or a deterministic fake for tests. Vectors are checked against the configured
   dimensions. Cosine similarity and conversion to and from the database vector format.
+- Paragraph lineage: each paragraph keeps one identity through an article's edits, with a
+  state for every wording, restored paragraphs recognised, and edits that were later undone
+  marked. A rewrite that keeps at least 60% of its words stays the same paragraph.
 
 ## [0.1.0] - 2026-11-14
 
