@@ -14,3 +14,5 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Python project with uv, Makefile targets, a MariaDB 12.3 container and an environment
   template. Database, embedding and vector search settings live in `.env`, not in the code;
   `make setup` creates it from `.env.example`.
+- MariaDB schema: system-versioned `paragraph` and `article_history` tables, a cosine vector
+  index on `text_vector`, and tables for signals, coverage gaps and cached answers.
