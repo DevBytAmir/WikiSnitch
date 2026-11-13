@@ -16,6 +16,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   two versions, CSV download, the sampling of an article at many dates that the time machine
   needs, and shared parts (icons, labels, trust badges with their rules, word diff, drift
   chart, loading and error states).
+- The paragraph panel: select a paragraph to see "Through time" (every state with its author, a
+  word diff, the type of each change, how far the meaning drifted and a link to the exact
+  revision) and "Across languages" (the closest paragraph in each other language, how close it
+  is and whether the numbers agree). Paragraphs show their trust badge in the margin.
 
 ## [0.5.0] - 2026-11-14
 
