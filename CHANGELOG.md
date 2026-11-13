@@ -24,6 +24,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   chart of its length, each paragraph's life (coloured by the badge it had then) or its edits per
   month. The story of the page as moments, a side rail with the version in numbers, and a
   comparison of two dates that lines the paragraphs up by identity.
+- "Show SQL" drawer on every screen with the statements behind what is shown, a data menu to
+  download what is on screen, and a help page that lists what can be done and explains badges,
+  similarity, undone edits and where the data comes from, with small interactive examples.
 
 ## [0.5.0] - 2026-11-14
 
