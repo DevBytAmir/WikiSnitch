@@ -51,6 +51,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   cover that every area shows a message with a Retry button when the service is down, that the
   keyboard reaches every paragraph and the panel, that every badge has visible text, and that
   nothing renders raw HTML, because Wikipedia text is untrusted.
+- Continuous integration on GitHub: every pull request and every push to `main` sets up the
+  project with `make setup` (the same `.env.example` and database container as a laptop), runs
+  lint and the Python tests, and typechecks, tests and builds the web app.
 
 ### Fixed
 
