@@ -14,6 +14,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   connection is always UTC and uses the configured vector search depth.
 - Text cleaning: wikitext and Markdown become headings, paragraphs and list items with
   citation counts, and each distinct text gets a stable MD5 identity.
+- Number extraction: years and figures are normalised so that `25 000`, `25,000` and `25000`
+  compare equal, and two texts can be compared by the numbers that differ.
 
 ## [0.1.0] - 2026-11-14
 
