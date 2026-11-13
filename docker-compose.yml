@@ -1,0 +1,20 @@
+services:
+  mariadb:
+    image: docker.io/library/mariadb:lts
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?set DB_ROOT_PASSWORD in .env}
+      MARIADB_DATABASE: ${DB_NAME:?set DB_NAME in .env}
+      MARIADB_USER: ${DB_USER:?set DB_USER in .env}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+    command: ["--max-allowed-packet=64M", "--innodb-buffer-pool-size=1G"]
+    ports:
+      - "${DB_PORT:?set DB_PORT in .env}:3306"
+    volumes:
+      - wikisnitch-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 30
+
+volumes:
+  wikisnitch-data:
