@@ -45,6 +45,12 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Back and Forward return to where the reader was on the page, waiting for its data to load
   first. A new page starts at the top, and a change of the address that only changes the date,
   the selection or the search does not scroll.
+- The application shell: top bar with the WikiSnitch logo, a home page with the dataset in numbers
+  and the article list, routes for the list, the article reader, the review queue, the Ask page
+  and the help page, and the stylesheet for the Wikipedia look in light and dark themes. Tests
+  cover that every area shows a message with a Retry button when the service is down, that the
+  keyboard reaches every paragraph and the panel, that every badge has visible text, and that
+  nothing renders raw HTML, because Wikipedia text is untrusted.
 
 ## [0.5.0] - 2026-11-14
 
