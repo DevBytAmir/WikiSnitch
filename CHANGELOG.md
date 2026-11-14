@@ -14,6 +14,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Threshold calibration: a script makes a sheet of paragraph pairs for a person to label (same,
   related, different), and another chooses the cut-offs with the best F1 score, refusing to
   calibrate from fewer than 40 labels and keeping the other thresholds.
+- A sheet of 60 labelled paragraph pairs (4 same, 17 related, 39 different) and the thresholds
+  calibrated from it: same claim from a similarity of 0.662, related from 0.439. The file also
+  holds the lowest similarity at which *Ask* answers (0.522) and the similarity below which a
+  change counts as a change of meaning (0.9).
 
 ## [0.4.0] - 2026-11-14
 
