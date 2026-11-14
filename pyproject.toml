@@ -1,6 +1,6 @@
 [project]
 name = "wikisnitch"
-version = "0.3.0"
+version = "0.4.0"
 description = "Paragraph-level edit history and cross-language comparison for Wikipedia, on MariaDB."
 requires-python = "==3.12.*"
 license = { text = "MIT" }
