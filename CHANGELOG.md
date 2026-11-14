@@ -7,6 +7,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-14
+
 ### Added
 
 - Settings loaded from the environment or `.env` with no defaults in code: a missing value
@@ -38,5 +40,6 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - MariaDB schema: system-versioned `paragraph` and `article_history` tables, a cosine vector
   index on `text_vector`, and tables for signals, coverage gaps and cached answers.
 
-[Unreleased]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/DevBytAmir/WikiSnitch/releases/tag/v0.1.0
