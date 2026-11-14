@@ -15,6 +15,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   from `WEB_ORIGIN`. Every embedder can say whether its service is reachable.
 - Response models for every endpoint, written to match the API contract with unknown fields
   forbidden, and every SQL statement of the API in one module.
+- Answer-model client for any OpenAI-compatible service, configured by the `LLM_*` settings,
+  with a cache of answers in the database. Wikipedia text is sent as quoted data, citation
+  numbers the model invents are removed, and its JSON verdicts are validated.
 
 ## [0.3.0] - 2026-11-14
 
