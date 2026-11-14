@@ -11,6 +11,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Scripts that measure the datasets (versions per article, distinct paragraphs, overlap
   between languages, paragraph sizes) and so size the embedding job, with how to run them.
+- Threshold calibration: a script makes a sheet of paragraph pairs for a person to label (same,
+  related, different), and another chooses the cut-offs with the best F1 score, refusing to
+  calibrate from fewer than 40 labels and keeping the other thresholds.
 
 ## [0.4.0] - 2026-11-14
 
