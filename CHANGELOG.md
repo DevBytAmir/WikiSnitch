@@ -21,6 +21,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Articles: a list with search (title prefix, then full text), the article reader with a trust
   badge per paragraph, the same topic in other languages, and a view as of any earlier moment
   that rebuilds the text with `FOR SYSTEM_TIME AS OF`. Edit timeline with reverts per month.
+- Paragraph history: every state of a paragraph with its author, comment and link to the exact
+  revision, a word-level diff against the last live state, the type of each change, how far the
+  meaning moved, and which states were undone.
 
 ## [0.3.0] - 2026-11-14
 

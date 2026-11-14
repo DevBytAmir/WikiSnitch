@@ -12,6 +12,7 @@ from fastapi.responses import JSONResponse
 from api.errors import ApiError, api_error_handler, internal_error_handler
 from api.routes.articles import router as articles_router
 from api.routes.health import router as health_router
+from api.routes.paragraphs import router as paragraphs_router
 from core.config import load_settings
 from core.embedder import EmbedderUnavailable
 
@@ -60,3 +61,4 @@ app.add_exception_handler(Exception, internal_error_handler)
 
 app.include_router(health_router)
 app.include_router(articles_router)
+app.include_router(paragraphs_router)
