@@ -52,6 +52,11 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   keyboard reaches every paragraph and the panel, that every badge has visible text, and that
   nothing renders raw HTML, because Wikipedia text is untrusted.
 
+### Fixed
+
+- The history load runs on Windows: `tzdata` is now a dependency, because pyarrow cannot read
+  the time-zoned timestamps of dataset M without it.
+
 ## [0.5.0] - 2026-11-14
 
 ### Added
