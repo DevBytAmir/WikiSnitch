@@ -16,6 +16,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Loading of dataset S: articles in Finnish, Swedish and English, the ready-made article
   vectors, the category tree, and current-text paragraphs for the counterparts of the history
   set (or for every article with `--paragraphs all`). Repeating the load changes nothing.
+- Fixture articles with a known edit history (an undone vandal edit, a changed figure, a
+  moved paragraph, a disputed one) and counterparts in English and Swedish, for tests and for
+  running the app without the real data.
 
 ## [0.2.0] - 2026-11-14
 
