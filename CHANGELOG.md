@@ -36,6 +36,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   numbered citations, each with its trust badge and a link to the article version. Without a
   model the closest passages are shown, and when nothing is close enough it says so. With a past
   date it shows what changed in the evidence between then and today.
+- The home page hero: an engraved seal under a moon that turns through its phases, with a network
+  of numbered boxes through it that can be dragged and spring back. Motion stops for readers who
+  prefer reduced motion. The images are loaded from `public/hero` so the browser can start
+  fetching them early.
 
 ## [0.5.0] - 2026-11-14
 
