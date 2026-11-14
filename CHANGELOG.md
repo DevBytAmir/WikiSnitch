@@ -35,6 +35,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   them with no database and no network to MariaDB (resumable, retrying a failing server, and
   recording texts that keep failing), then import the vectors. Embedding settings can now be
   loaded alone, so a machine that only embeds needs no database settings.
+- Lineage check: rebuilds every Nth stored version of an article from its paragraph states
+  with `FOR SYSTEM_TIME AS OF` and compares it with the stored text, failing on any mismatch.
+  `make load-hero` runs the whole load and this check, and prints the time of each step.
+  A SQL report gives table sizes and row counts.
 
 ## [0.2.0] - 2026-11-14
 

@@ -1,7 +1,10 @@
 COMPOSE ?= docker compose
 FIXTURE_ENV = DB_NAME=wikisnitch_test EMBEDDER=fake
 
-.PHONY: setup test dev dev-fixtures db-shell
+# $(call step,<command>,<name>): run the command, stop on failure, print its wall time.
+step = t=$$(date +%s); $(1) || exit 1; echo "== $(2): $$(( $$(date +%s) - t )) s"
+
+.PHONY: setup test dev dev-fixtures db-shell load-hero
 
 setup:
 	@test -f .env || { cp .env.example .env; echo "created .env from .env.example"; }
@@ -20,6 +23,14 @@ dev-fixtures:
 	$(FIXTURE_ENV) uv run python -c "from pipeline.create_tables import recreate_test_database; recreate_test_database()"
 	$(FIXTURE_ENV) uv run python -m pipeline.load_fixtures
 	$(FIXTURE_ENV) uv run uvicorn api.app:app --reload --port 8000
+
+load-hero:
+	@$(call step,uv run python -m pipeline.download s m,download)
+	@$(call step,uv run python -m pipeline.load_articles,load_articles)
+	@$(call step,uv run python -m pipeline.load_history,load_history)
+	@$(call step,uv run python -m pipeline.embed,embed)
+	@$(call step,uv run python -m pipeline.signals,signals)
+	@$(call step,uv run python -m pipeline.check_lineage --every 25,check_lineage)
 
 db-shell:
 	$(COMPOSE) exec mariadb sh -c 'mariadb -u"$$MARIADB_USER" -p"$$MARIADB_PASSWORD" "$$MARIADB_DATABASE"'
