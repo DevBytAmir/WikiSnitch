@@ -1,4 +1,4 @@
-"""Routes for the article list, the article reader and the edit timeline."""
+"""Routes for the article list, the article reader, the edit timeline and the review queue."""
 
 from __future__ import annotations
 
@@ -6,9 +6,9 @@ from fastapi import APIRouter, Depends
 
 from api.db import Db, get_db
 from api.errors import ApiError
-from api.models import ArticleList, ArticleView, Timeline
+from api.models import ArticleList, ArticleView, ReviewView, Timeline
 from api.params import parse_as_of, parse_lang
-from api.services import articles, timeline
+from api.services import articles, review, timeline
 
 router = APIRouter()
 
@@ -38,3 +38,10 @@ def get_timeline(lang: str, page_id: int, db: Db = Depends(get_db)) -> Timeline:
     """Edits and reverts per month, for articles with edit history."""
     parse_lang(lang)
     return timeline.get_timeline(db, lang, page_id)
+
+
+@router.get("/api/articles/{lang}/{page_id}/review", response_model=ReviewView)
+def get_review(lang: str, page_id: int, db: Db = Depends(get_db)) -> ReviewView:
+    """Paragraphs that need attention, most urgent first, and what the other languages have extra."""
+    parse_lang(lang)
+    return review.get_review(db, lang, page_id)

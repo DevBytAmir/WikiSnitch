@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from api import queries
 from api.db import Db
-from api.errors import ApiError
 from api.models import Timeline, TimelineMonth, TimelineTotals
+from api.services.articles import require_history
 from core.db import utc
 
 
@@ -14,11 +14,7 @@ def get_timeline(db: Db, lang: str, page_id: int) -> Timeline:
 
     Raises 404 for an unknown article and 409 for one without edit history.
     """
-    header = db.one("The article", queries.ARTICLE, (lang, page_id))
-    if header is None:
-        raise ApiError(404, "not_found", f"No article {lang}/{page_id}.")
-    if lang != "fi" or db.one("Has history", queries.CURRENT_VERSION, (page_id,)) is None:
-        raise ApiError(409, "no_history", "This article was loaded without edit history.")
+    require_history(db, lang, page_id)
 
     rows = db.query("Edits and reverts per month", queries.TIMELINE_MONTHS, (page_id,))
     span = db.one("First and last version", queries.TIMELINE_SPAN, (page_id,))

@@ -24,6 +24,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Paragraph history: every state of a paragraph with its author, comment and link to the exact
   revision, a word-level diff against the last live state, the type of each change, how far the
   meaning moved, and which states were undone.
+- Review queue: the paragraphs of an article ordered by how much they need an editor's attention
+  (changed recently, disputed, unsourced, at odds with another language), with the reasons, and
+  the paragraphs of other languages that nothing in the Finnish article covers.
 
 ## [0.3.0] - 2026-11-14
 

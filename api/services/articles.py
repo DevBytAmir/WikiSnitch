@@ -111,7 +111,21 @@ def list_articles(db: Db, q: str, history_only: bool, limit: int) -> ArticleList
     return ArticleList(articles=articles, sql=db.statements)
 
 
-def _signal_badge(row: dict) -> Badge | None:
+def require_history(db: Db, lang: str, page_id: int) -> dict:
+    """The article's header row, for endpoints that only make sense with edit history.
+
+    Raises 404 for an unknown article and 409 for one that was loaded without edit history, which
+    is every article that is not Finnish and every Finnish one outside the history set.
+    """
+    header = db.one("The article", queries.ARTICLE, (lang, page_id))
+    if header is None:
+        raise ApiError(404, "not_found", f"No article {lang}/{page_id}.")
+    if lang != "fi" or db.one("Has history", queries.CURRENT_VERSION, (page_id,)) is None:
+        raise ApiError(409, "no_history", "This article was loaded without edit history.")
+    return header
+
+
+def signal_badge(row: dict) -> Badge | None:
     """The precomputed badge of an outline row, or ``None`` if the paragraph has none."""
     if row["badge"] is None:
         return None
@@ -137,7 +151,7 @@ def _current_history_view(
             continue
         if row["text"] is None:
             continue
-        badge = _signal_badge(row)
+        badge = signal_badge(row)
         if badge is None:
             if history is None:
                 history = load_page_history(db, page_id)
