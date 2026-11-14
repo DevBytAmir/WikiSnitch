@@ -42,6 +42,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   fetching them early.
 - Favicons in three sizes, and on the home page the hero images start downloading at once,
   alongside the app's code, instead of after it has loaded.
+- Back and Forward return to where the reader was on the page, waiting for its data to load
+  first. A new page starts at the top, and a change of the address that only changes the date,
+  the selection or the search does not scroll.
 
 ## [0.5.0] - 2026-11-14
 
