@@ -26,9 +26,10 @@ class EmbedderUnavailable(Exception):
 
 
 class Embedder(Protocol):
-    """Anything that turns texts into vectors and names the model that made them."""
+    """Anything that turns texts into vectors, naming the model and the vector length."""
 
     model: str
+    dimensions: int
 
     def embed(self, texts: list[str]) -> list[list[float]]: ...
 
@@ -154,24 +155,24 @@ class FakeEmbedder:
     model = "fake"
 
     def __init__(self, dim: int = 1024) -> None:
-        self.dim = dim
+        self.dimensions = dim
 
     def _token_vector(self, token: str) -> list[float]:
         seed = int.from_bytes(hashlib.md5(token.encode("utf-8")).digest()[:8], "big")
         rng = random.Random(seed)
-        return [rng.gauss(0, 1) for _ in range(self.dim)]
+        return [rng.gauss(0, 1) for _ in range(self.dimensions)]
 
     def embed(self, texts: list[str]) -> list[list[float]]:
         return [self._embed_one(text) for text in texts]
 
     def _embed_one(self, text: str) -> list[float]:
-        total = [0.0] * self.dim
+        total = [0.0] * self.dimensions
         for token in text.lower().split():
             for i, value in enumerate(self._token_vector(token)):
                 total[i] += value
         norm = math.sqrt(sum(x * x for x in total))
         if norm == 0:
-            unit = [0.0] * self.dim
+            unit = [0.0] * self.dimensions
             unit[0] = 1.0
             return unit
         return [x / norm for x in total]

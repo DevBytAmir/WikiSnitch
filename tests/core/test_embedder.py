@@ -88,6 +88,12 @@ def test_cosine_matches_the_definition():
         assert abs(cosine(a, b) - expected) < 1e-12
 
 
+def test_every_embedder_reports_its_dimensions():
+    assert FakeEmbedder(dim=8).dimensions == 8
+    assert OllamaEmbedder("http://embed.example", "m", 3).dimensions == 3
+    assert OpenAICompatibleEmbedder("https://api.example/v1", "m", 5).dimensions == 5
+
+
 def test_vector_text_round_trip():
     assert from_sql(to_sql([0.5, -1.0])) == [0.5, -1.0]
 

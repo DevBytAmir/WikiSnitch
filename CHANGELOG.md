@@ -22,6 +22,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - History load: every paragraph state of an article is stored with Wikipedia's real edit
   times, next to the whole versions, so MariaDB's own history matches the article's. Reading
   a past state is one `FOR SYSTEM_TIME` query.
+- Paragraph embedding: one vector per distinct text, current paragraphs first, committed in
+  batches so an interrupted run can resume. Every embedder now reports its vector length.
 
 ## [0.2.0] - 2026-11-14
 
