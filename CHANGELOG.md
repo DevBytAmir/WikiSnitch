@@ -18,6 +18,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Answer-model client for any OpenAI-compatible service, configured by the `LLM_*` settings,
   with a cache of answers in the database. Wikipedia text is sent as quoted data, citation
   numbers the model invents are removed, and its JSON verdicts are validated.
+- Articles: a list with search (title prefix, then full text), the article reader with a trust
+  badge per paragraph, the same topic in other languages, and a view as of any earlier moment
+  that rebuilds the text with `FOR SYSTEM_TIME AS OF`. Edit timeline with reverts per month.
 
 ## [0.3.0] - 2026-11-14
 
