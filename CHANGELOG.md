@@ -20,6 +20,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   word diff, the type of each change, how far the meaning drifted and a link to the exact
   revision) and "Across languages" (the closest paragraph in each other language, how close it
   is and whether the numbers agree). Paragraphs show their trust badge in the margin.
+- Time machine for an article: play its history, step between changes or jump to a date, over a
+  chart of its length, each paragraph's life (coloured by the badge it had then) or its edits per
+  month. The story of the page as moments, a side rail with the version in numbers, and a
+  comparison of two dates that lines the paragraphs up by identity.
 
 ## [0.5.0] - 2026-11-14
 
