@@ -7,6 +7,11 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- README with what the project does, how it uses MariaDB, the data and the benchmark results, how
+  to run it, every setting, the API, the project structure, testing, releases and credits.
+
 ## [0.6.0] - 2026-11-14
 
 ### Added
