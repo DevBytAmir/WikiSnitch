@@ -27,6 +27,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Review queue: the paragraphs of an article ordered by how much they need an editor's attention
   (changed recently, disputed, unsourced, at odds with another language), with the reasons, and
   the paragraphs of other languages that nothing in the Finnish article covers.
+- Ask: a question in any language is matched against the paragraph vectors and answered with
+  cited passages, each with its trust badge. Below the similarity cut-off the model is not
+  called. A past date answers from Wikipedia as it stood then. Without a model, or if it fails,
+  the passages are shown instead.
 
 ## [0.3.0] - 2026-11-14
 
