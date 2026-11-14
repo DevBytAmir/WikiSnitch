@@ -35,6 +35,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   (and Finnish) articles on the same topic, classified as the same claim, related or not found
   by calibrated thresholds, a comparison of the numbers when the claim is the same, and an
   optional short verdict from the answer model that is cached and validated.
+- Contract test: every endpoint's real response, success and error, is validated against its
+  response model, and every route must have a case. A script exports those responses as JSON
+  fixtures, so the web app can be built and tested without the API running.
 
 ## [0.3.0] - 2026-11-14
 
