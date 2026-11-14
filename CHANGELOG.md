@@ -22,6 +22,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   through MariaDB's one vector per article and through our vector per paragraph, with hit rates
   at 1, 5 and 10 and a report that states how many articles have paragraph vectors. The
   calibrated `ask_min` is only changed when asked to with `--update-ask-min`.
+- Benchmark results on all 29,460 articles: finding the right article in the top 5 works for 70%
+  of the questions through paragraph vectors and 76% through article vectors. Paragraphs are
+  better for English questions (85% against 69%) and worse for Finnish ones (46% against 77%).
 
 ## [0.4.0] - 2026-11-14
 
