@@ -40,6 +40,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   of numbered boxes through it that can be dragged and spring back. Motion stops for readers who
   prefer reduced motion. The images are loaded from `public/hero` so the browser can start
   fetching them early.
+- Favicons in three sizes, and on the home page the hero images start downloading at once,
+  alongside the app's code, instead of after it has loaded.
 
 ## [0.5.0] - 2026-11-14
 

@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Wikipedia, with a memory: paragraph history, trust badges, cross-language comparison and cited answers for Finnish Wikipedia." />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <title>WikiSnitch</title>
     <script>
       // Apply the saved theme (or the system preference) before first paint. See src/lib/theme.ts.
@@ -12,6 +15,19 @@
         var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
         if (dark) document.documentElement.dataset.theme = "dark";
       } catch (e) {}
+      // On the home page, start downloading the hero's seal and moon now, alongside the app's code, instead of
+      // after it has loaded. The seal is a CSS mask, which is fetched in CORS mode, so its preload must be too.
+      if (location.pathname === "/") {
+        [["/hero/seal.webp", true], ["/hero/moon.webp", false]].forEach(function (img) {
+          var link = document.createElement("link");
+          link.rel = "preload";
+          link.as = "image";
+          link.type = "image/webp";
+          link.href = img[0];
+          if (img[1]) link.crossOrigin = "anonymous";
+          document.head.appendChild(link);
+        });
+      }
     </script>
   </head>
   <body>
