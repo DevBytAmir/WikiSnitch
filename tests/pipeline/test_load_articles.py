@@ -9,6 +9,7 @@ import pytest
 from core.db import connect
 from pipeline import download as dl
 from pipeline.load_articles import (
+    _paragraph_keys,
     store_article_rows,
     store_markdown_article,
 )
@@ -148,3 +149,17 @@ def test_article_rows_accept_dataset_date_strings(con):
     with con.cursor() as cur:
         cur.execute("SELECT date_modified FROM article WHERE lang='fi' AND page_id=90999")
         assert str(cur.fetchone()["date_modified"]) == "2025-08-16 04:18:02"
+
+
+def test_counterparts_selected_by_wikidata_id(con):
+    assert _paragraph_keys(con, {9001, 9002}, False) == [("en", 8001), ("sv", 7001)]
+    assert _paragraph_keys(con, {9002}, False) == []
+    with con.cursor() as cur:
+        cur.execute(
+            "SELECT lang, page_id, COUNT(*) AS n FROM paragraph "
+            "WHERE (lang='en' AND page_id=8001) OR (lang='sv' AND page_id=7001) "
+            "GROUP BY lang, page_id"
+        )
+        counts = {(r["lang"], r["page_id"]): r["n"] for r in cur.fetchall()}
+    assert counts[("en", 8001)] > 0
+    assert counts[("sv", 7001)] > 0

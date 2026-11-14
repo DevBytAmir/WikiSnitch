@@ -28,6 +28,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   paragraph, the most similar paragraph in English and Swedish, whether the numbers differ
   when the claims match, and the paragraphs of other languages that nothing in the Finnish
   article covers.
+- Fixture loader: the test database is filled with the fixture articles on every test run,
+  using the fake embedder, so tests of signals, embedding and cross-language selection check
+  exact, known answers.
 
 ## [0.2.0] - 2026-11-14
 

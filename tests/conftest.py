@@ -16,9 +16,12 @@ core.thresholds.DEFAULT_PATH = core.thresholds.ROOT / "eval" / "thresholds.tests
 import pytest  # noqa: E402
 
 from pipeline.create_tables import recreate_test_database  # noqa: E402
+from pipeline.load_fixtures import main as load_fixtures  # noqa: E402
 
 
 @pytest.fixture(scope="session", autouse=True)
 def fresh_database():
-    """Drop and rebuild the test database from the schema once per test run."""
+    """Drop the test database, rebuild it from the schema and load the fixture articles once per
+    test run."""
     recreate_test_database()
+    load_fixtures()

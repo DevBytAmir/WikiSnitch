@@ -4,7 +4,8 @@ import pytest
 
 from core.db import connect
 from core.embedder import FakeEmbedder
-from core.vectors import from_sql
+from core.vectors import cosine, from_sql
+from db.fixtures import data
 from pipeline.embed import embed_missing
 from pipeline.load_articles import store_markdown_article
 
@@ -132,3 +133,77 @@ def test_very_long_text_is_embedded(con):
         assert len(from_sql(row["e"])) == 1024
     finally:
         embed_missing(con, FakeEmbedder())
+
+
+def _current_vector(con, lang, page_id, para_id):
+    with con.cursor() as cur:
+        cur.execute(
+            "SELECT VEC_ToText(v.embedding) AS e FROM paragraph p "
+            "JOIN text_vector v ON v.text_hash = p.text_hash "
+            "WHERE p.lang=%s AND p.page_id=%s AND p.para_id=%s",
+            (lang, page_id, para_id),
+        )
+        row = cur.fetchone()
+    assert row is not None
+    return from_sql(row["e"])
+
+def test_embeds_each_distinct_text_once(con):
+    shared = _one_hash(
+        con,
+        "SELECT text_hash FROM paragraph WHERE lang='fi' AND page_id=9001 AND para_id=4",
+    )
+    assert shared == _one_hash(
+        con,
+        "SELECT text_hash FROM paragraph WHERE lang='fi' AND page_id=9001 AND para_id=7",
+    )
+    assert _vector_rows(con, shared) == 1
+
+    _store_fresh(con, 90501, ONE, ONE)
+    try:
+        assert embed_missing(con, FakeEmbedder()) == 1
+        fresh = _one_hash(
+            con, "SELECT text_hash FROM paragraph WHERE lang='fi' AND page_id=90501 AND para_id=1"
+        )
+        assert _vector_rows(con, fresh) == 1
+    finally:
+        embed_missing(con, FakeEmbedder())
+
+
+def test_undone_and_short_texts_not_embedded(con):
+    junk = _one_hash(
+        con,
+        "SELECT text_hash FROM paragraph FOR SYSTEM_TIME ALL WHERE text=%s AND undone=1",
+        (data.JUNK,),
+    )
+    short = _one_hash(
+        con, "SELECT text_hash FROM paragraph WHERE lang='fi' AND page_id=9002 AND para_id=1"
+    )
+    assert _vector_rows(con, junk) == 0
+    assert _vector_rows(con, short) == 0
+
+def test_is_current_flag(con):
+    p1a = _one_hash(
+        con,
+        "SELECT text_hash FROM paragraph FOR SYSTEM_TIME ALL WHERE text=%s",
+        (data.P1A,),
+    )
+    p1b = _one_hash(
+        con, "SELECT text_hash FROM paragraph WHERE lang='fi' AND page_id=9001 AND para_id=1"
+    )
+    with con.cursor() as cur:
+        cur.execute("SELECT is_current FROM text_vector WHERE text_hash IN (%s, %s) "
+                    "ORDER BY is_current", (p1a, p1b))
+        flags = [bool(r["is_current"]) for r in cur.fetchall()]
+    assert flags == [False, True]
+
+def test_fixture_counterparts_are_similar(con):
+    p1b = _current_vector(con, "fi", 9001, 1)
+    p2c = _current_vector(con, "fi", 9001, 2)
+    p3a = _current_vector(con, "fi", 9001, 4)
+    e1 = _current_vector(con, "en", 8001, 1)
+    e2 = _current_vector(con, "en", 8001, 2)
+    s1 = _current_vector(con, "sv", 7001, 1)
+    assert cosine(p1b, e1) >= 0.75
+    assert cosine(p2c, s1) >= 0.75
+    assert cosine(p3a, e1) < 0.60
+    assert cosine(p3a, e2) < 0.60
