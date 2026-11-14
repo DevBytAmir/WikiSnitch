@@ -7,6 +7,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-14
+
 ### Added
 
 - Web app project (React, TypeScript, Vite) with a typed client for every endpoint of the API, and
@@ -183,7 +185,8 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - MariaDB schema: system-versioned `paragraph` and `article_history` tables, a cosine vector
   index on `text_vector`, and tables for signals, coverage gaps and cached answers.
 
-[Unreleased]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/DevBytAmir/WikiSnitch/compare/v0.2.0...v0.3.0
