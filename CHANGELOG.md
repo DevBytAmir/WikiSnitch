@@ -24,6 +24,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   a past state is one `FOR SYSTEM_TIME` query.
 - Paragraph embedding: one vector per distinct text, current paragraphs first, committed in
   batches so an interrupted run can resume. Every embedder now reports its vector length.
+- Paragraph signals: a badge, review reasons and a review priority for every current
+  paragraph, the most similar paragraph in English and Swedish, whether the numbers differ
+  when the claims match, and the paragraphs of other languages that nothing in the Finnish
+  article covers.
 
 ## [0.2.0] - 2026-11-14
 
