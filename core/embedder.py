@@ -18,7 +18,7 @@ from typing import TYPE_CHECKING, Any, Protocol
 import requests
 
 if TYPE_CHECKING:
-    from core.config import Settings
+    from core.config import EmbeddingSettings
 
 
 class EmbedderUnavailable(Exception):
@@ -178,7 +178,7 @@ class FakeEmbedder:
         return [x / norm for x in total]
 
 
-def get_embedder(settings: Settings) -> Embedder:
+def get_embedder(settings: EmbeddingSettings) -> Embedder:
     """The embedder that ``settings.embedder`` names. Raises ``ValueError`` for an unknown name."""
     provider = settings.embedder
     if provider == "fake":

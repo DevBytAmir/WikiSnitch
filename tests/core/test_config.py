@@ -1,7 +1,7 @@
 import pytest
 
 from core import config
-from core.config import MissingSettingError, load_settings
+from core.config import MissingSettingError, load_embedding_settings, load_settings
 
 REQUIRED = {
     "DB_HOST": "db.example",
@@ -92,3 +92,23 @@ def test_secrets_are_not_in_repr_or_str(clean_environment, monkeypatch):
     text = repr(load_settings()) + str(load_settings())
     for secret in ("app-secret", "root-secret", "key-one", "key-two", "key-three"):
         assert secret not in text
+
+
+def test_embedding_settings_load_without_any_database_setting(clean_environment, monkeypatch):
+    embedding_only = {k: v for k, v in REQUIRED.items() if k.startswith(("EMBED", "EMBEDDER"))}
+    set_environment(monkeypatch, embedding_only)
+    settings = load_embedding_settings()
+    assert settings.embedder == "openai" and settings.embed_dimensions == 768
+    assert not hasattr(settings, "db_host")
+
+
+def test_embedding_settings_still_name_what_is_missing(clean_environment, monkeypatch):
+    set_environment(monkeypatch, {"EMBEDDER": "ollama"})
+    with pytest.raises(MissingSettingError, match="EMBED_BASE_URL"):
+        load_embedding_settings()
+
+
+def test_full_settings_include_the_embedding_settings(clean_environment, monkeypatch):
+    set_environment(monkeypatch)
+    settings = load_settings()
+    assert settings.embed_model == "model-x" and settings.db_name == "appdb"

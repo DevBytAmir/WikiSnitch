@@ -31,6 +31,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Fixture loader: the test database is filled with the fixture articles on every test run,
   using the fake embedder, so tests of signals, embedding and cross-language selection check
   exact, known answers.
+- Vector files for embedding on another machine: export the texts that need vectors, embed
+  them with no database and no network to MariaDB (resumable, retrying a failing server, and
+  recording texts that keep failing), then import the vectors. Embedding settings can now be
+  loaded alone, so a machine that only embeds needs no database settings.
 
 ## [0.2.0] - 2026-11-14
 
