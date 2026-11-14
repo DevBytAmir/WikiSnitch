@@ -31,6 +31,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   cited passages, each with its trust badge. Below the similarity cut-off the model is not
   called. A past date answers from Wikipedia as it stood then. Without a model, or if it fails,
   the passages are shown instead.
+- Cross-language comparison: for a paragraph, the closest paragraphs in the English and Swedish
+  (and Finnish) articles on the same topic, classified as the same claim, related or not found
+  by calibrated thresholds, a comparison of the numbers when the claim is the same, and an
+  optional short verdict from the answer model that is cached and validated.
 
 ## [0.3.0] - 2026-11-14
 

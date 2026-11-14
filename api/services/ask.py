@@ -17,7 +17,7 @@ from api.history_cache import badge_at, load_page_history
 from api.llm import Llm, LlmUnavailable, cached_complete
 from api.models import AskRetrieval, AskView, Badge, Citation
 from api.prompts import ASK_SYSTEM, Passage, build_ask_user, clean_answer
-from api.services.articles import UNKNOWN, signal_badge, wikipedia_url
+from api.services.articles import UNKNOWN, as_badge, signal_badge, wikipedia_url
 from core.config import SNAPSHOT
 from core.db import sql_ts
 from core.embedder import Embedder
@@ -124,9 +124,7 @@ def ask(
         for i, row in enumerate(selected, 1):
             history = load_page_history(db, row["page_id"])
             b = badge_at(history, row["para_id"], moment, thresholds)
-            ranked.append(
-                _citation(i, row, Badge(level=b.level, label=b.label, reasons=list(b.reasons)))
-            )
+            ranked.append(_citation(i, row, as_badge(b)))
     else:
         ranked = [_citation(i, row) for i, row in enumerate(selected, 1)]
 

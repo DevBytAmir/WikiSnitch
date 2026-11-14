@@ -8,7 +8,6 @@ from api.diff import word_diff
 from api.errors import ApiError
 from api.history_cache import badge_at, load_page_history
 from api.models import (
-    Badge,
     DiffOp,
     HistoryMetrics,
     HistoryState,
@@ -16,7 +15,7 @@ from api.models import (
     ParagraphSummary,
     StateChange,
 )
-from api.services.articles import UNKNOWN, wikipedia_url
+from api.services.articles import UNKNOWN, as_badge, wikipedia_url
 from core.badges import compute_metrics
 from core.changes import describe_changes
 from core.config import SNAPSHOT
@@ -124,7 +123,7 @@ def paragraph_history(db: Db, lang: str, page_id: int, para_id: int) -> HistoryV
     latest = live[-1] if live else states[-1]
     if live and states[-1].end is None:
         value = badge_at(history, para_id, SNAPSHOT, th)
-        badge = Badge(level=value.level, label=value.label, reasons=list(value.reasons))
+        badge = as_badge(value)
     else:
         badge = UNKNOWN
     summary = ParagraphSummary(

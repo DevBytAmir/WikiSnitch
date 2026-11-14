@@ -35,8 +35,8 @@ def wikipedia_url(lang: str, rev_id: int | None) -> str:
     return f"https://{lang}.wikipedia.org/?oldid={rev_id}"
 
 
-def _badge(value) -> Badge:
-    """A core badge as the response model."""
+def as_badge(value) -> Badge:
+    """A badge computed by ``core.badges`` as the response model."""
     return Badge(level=value.level, label=value.label, reasons=list(value.reasons))
 
 
@@ -156,7 +156,7 @@ def _current_history_view(
             if history is None:
                 history = load_page_history(db, page_id)
                 th = load_thresholds()
-            badge = _badge(badge_at(history, row["para_id"], SNAPSHOT, th))
+            badge = as_badge(badge_at(history, row["para_id"], SNAPSHOT, th))
         items.append(
             ParagraphBlock(
                 paragraph=ParagraphSummary(
@@ -227,7 +227,7 @@ def _past_view(
                     kind=row["kind"],
                     citations=None if row["citations"] is None else int(row["citations"]),
                     has_history=True,
-                    badge=_badge(badge_at(history, item.para_id, moment, th)),
+                    badge=as_badge(badge_at(history, item.para_id, moment, th)),
                 )
             )
         )
