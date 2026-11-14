@@ -19,6 +19,9 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Fixture articles with a known edit history (an undone vandal edit, a changed figure, a
   moved paragraph, a disputed one) and counterparts in English and Swedish, for tests and for
   running the app without the real data.
+- History load: every paragraph state of an article is stored with Wikipedia's real edit
+  times, next to the whole versions, so MariaDB's own history matches the article's. Reading
+  a past state is one `FOR SYSTEM_TIME` query.
 
 ## [0.2.0] - 2026-11-14
 
