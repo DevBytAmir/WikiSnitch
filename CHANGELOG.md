@@ -12,6 +12,10 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Web app project (React, TypeScript, Vite) with a typed client for every endpoint of the API, and
   a fixture mode that serves real exported responses from `web/fixtures`, so the interface can be
   built and tested without the API running.
+- Interface foundations: light and dark theme that follows the system, word-level comparison of
+  two versions, CSV download, the sampling of an article at many dates that the time machine
+  needs, and shared parts (icons, labels, trust badges with their rules, word diff, drift
+  chart, loading and error states).
 
 ## [0.5.0] - 2026-11-14
 
