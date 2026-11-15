@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The WikiSnitch deck: the hero, the idea, the workflow and the main features, to present full screen or download as PDF." />
+  <title>WikiSnitch · The deck</title>
+  <link rel="icon" type="image/png" href="assets/favicon-32.png" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/site.css" />
+  <script>
+    // Same rule as the app: the saved theme, or the system preference.
+    try {
+      var saved = localStorage.getItem("wikisnitch-theme");
+      var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (dark) document.documentElement.dataset.theme = "dark";
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3l14 9-14 9V3z" fill="currentColor" stroke="none" /></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /><path d="M12 15V3" /></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></symbol>
+    <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7" /><path d="M19 12H5" /></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></symbol>
+    <symbol id="i-maximize" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3" /><path d="M21 8V5a2 2 0 0 0-2-2h-3" /><path d="M3 16v3a2 2 0 0 0 2 2h3" /><path d="M16 21h3a2 2 0 0 0 2-2v-3" /></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" /></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></symbol>
+    <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" /><path d="M16 13H8" /><path d="M16 17H8" /></symbol>
+  </svg>
+
+  <a class="skip-link" href="#deck">Skip to the deck</a>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html" aria-label="WikiSnitch deck, home">
+        <span class="brand-mark"><img src="assets/seal-mark.png" alt="" /></span>
+        <span class="brand-text"><span class="brand-name">WikiSnitch</span><span class="brand-tag">Wikipedia, with a memory</span></span>
+      </a>
+      <nav class="mainnav" aria-label="Sections">
+        <a href="#deck" class="active">Deck</a>
+        <a href="#slides">Slides</a>
+        <a href="#present">How to present</a>
+      </nav>
+      <div class="topbar-end">
+        <button class="btn btn-sm" id="theme" type="button"><svg class="icon"><use href="#i-moon" /></svg><span class="theme-text">Dark</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap intro" id="deck">
+      <div class="intro-copy">
+        <div class="eyebrow">Junction 2026 · MariaDB challenge</div>
+        <h1 class="intro-title">The WikiSnitch deck.</h1>
+        <p class="intro-lead">
+          Eleven slides in the app's own look: the hero, the idea, the workflow and the features that matter most.
+          Present them full screen from here, or take the PDF with you.
+        </p>
+        <div class="intro-actions">
+          <button class="btn btn-primary btn-lg" id="present" type="button"><svg class="icon"><use href="#i-play" /></svg> Present full screen</button>
+          <a class="btn btn-lg" href="WikiSnitch-deck.pdf" download="WikiSnitch-deck.pdf"><svg class="icon"><use href="#i-download" /></svg> Download PDF</a>
+        </div>
+        <a class="more-link" href="slides.html" target="_blank" rel="noopener">Open the slides in a new tab <svg class="icon"><use href="#i-arrow-up-right" /></svg></a>
+        <dl class="intro-stats">
+          <div><dd class="stat-value" id="count">15</dd><dd class="stat-label">slides, from the hero to the numbers</dd></div>
+          <div><dd class="stat-value">16:9</dd><dd class="stat-label">at 1920 × 1080, sharp on any screen</dd></div>
+          <div><dd class="stat-value">0</dd><dd class="stat-label">network calls: it works offline</dd></div>
+        </dl>
+      </div>
+
+      <div class="preview">
+        <div class="frame">
+          <iframe id="frame" src="slides.html" title="WikiSnitch slides" allow="fullscreen" allowfullscreen></iframe>
+        </div>
+        <div class="preview-bar">
+          <button class="icon-btn" id="prev" type="button" aria-label="Previous slide"><svg class="icon"><use href="#i-arrow-left" /></svg></button>
+          <span class="preview-pos" aria-live="polite"><span class="preview-n" id="pos">01 / 11</span><span class="preview-title" id="pos-title">Watch Wikipedia evolve through time</span></span>
+          <button class="icon-btn" id="next" type="button" aria-label="Next slide"><svg class="icon"><use href="#i-arrow-right" /></svg></button>
+          <button class="btn btn-sm preview-fs" id="fullscreen" type="button"><svg class="icon"><use href="#i-maximize" /></svg> Full screen</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="slides" aria-labelledby="slides-title">
+      <div class="eyebrow">The deck</div>
+      <h2 class="section-title" id="slides-title">Every slide</h2>
+      <p class="section-lead">Pick one to show it above. The hero, the idea and the workflow come first, then the features, then what MariaDB does underneath.</p>
+      <ol class="thumbs" id="thumbs"></ol>
+    </section>
+
+    <section class="wrap section" id="present" aria-labelledby="present-title">
+      <div class="eyebrow">How to present</div>
+      <h2 class="section-title" id="present-title">Three keys are enough</h2>
+      <ol class="steps">
+        <li class="step card">
+          <div class="step-head"><span class="step-n">1</span><span class="step-title">Go full screen</span></div>
+          <p>Press <b>Present full screen</b>, or <kbd>F</kbd> on the slides. <kbd>Esc</kbd> leaves full screen.</p>
+        </li>
+        <li class="step card">
+          <div class="step-head"><span class="step-n">2</span><span class="step-title">Move through it</span></div>
+          <p><kbd>→</kbd> or <kbd>Space</kbd> for the next slide, <kbd>←</kbd> to go back, <kbd>Home</kbd> and <kbd>End</kbd> to jump. A click on the right or left side works too.</p>
+        </li>
+        <li class="step card">
+          <div class="step-head"><span class="step-n">3</span><span class="step-title">Light or dark</span></div>
+          <p><kbd>D</kbd> switches the theme, as in the app. The PDF is always the light version.</p>
+        </li>
+      </ol>
+      <p class="note-box">
+        <svg class="icon"><use href="#i-file-text" /></svg>
+        Changed a slide? Run <code>node presentation/build.mjs</code> to rebuild the PDF and the pictures above, or
+        <a href="slides.html?print" target="_blank" rel="noopener">open the print version</a> and save it as PDF from the browser.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>Wikipedia text and screenshots of it in the slides: <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, from Finnish, Swedish and English Wikipedia.</span>
+      <span>Datasets from MariaDB's examples, MIT. Built for Junction 2026.</span>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>

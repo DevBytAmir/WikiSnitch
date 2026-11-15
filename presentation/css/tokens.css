@@ -1,0 +1,131 @@
+/* WikiSnitch look, shared by the deck and its landing page. The tokens are the app's own
+   (web/src/styles.css): white page, near-black ink, blue links, grey hairlines, 2px corners,
+   serif only for titles. Light and dark themes share them. */
+
+:root {
+  color-scheme: light;
+  --font-sans: sans-serif;
+  --font-serif: "Linux Libertine", Georgia, Times, "Source Serif 4", serif;
+  --font-code: Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+  --radius: 2px;
+
+  --paper: #ffffff;
+  --paper-2: #f8f9fa;
+  --surface: #ffffff;
+  --ink: #202122;
+  --ink-2: #404244;
+  --muted: #54595d;
+  --faint: #72777d;
+  --line: #dadde3;
+  --line-2: #a2a9b1;
+  --link: #3366cc;
+  --hover: rgba(32, 33, 34, 0.04);
+  --hl: #ffe49c;
+  --hl-soft: #fef6e7;
+  --river: #3366cc;
+  --river-soft: #eaf3ff;
+
+  --stable: #1a7f37;
+  --stable-soft: #dafbe1;
+  --changed: #9a6700;
+  --changed-soft: #fff8c5;
+  --disputed: #cf222e;
+  --disputed-soft: #ffebe9;
+  --new: #0969da;
+  --new-soft: #ddf4ff;
+  --unknown: #6e7781;
+  --unknown-soft: #eaeef2;
+  --add: var(--stable);
+  --add-soft: var(--stable-soft);
+  --del: var(--disputed);
+  --del-soft: var(--disputed-soft);
+
+  --shadow: 0 1px 2px rgba(32, 33, 34, 0.06), 0 12px 32px -16px rgba(32, 33, 34, 0.35);
+  --code-bg: #202122;
+  --seal-filter: none;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #101418;
+  --paper-2: #161b21;
+  --surface: #12171c;
+  --ink: #eaecf0;
+  --ink-2: #c8ccd1;
+  --muted: #a2a9b1;
+  --faint: #8a9096;
+  --line: #2e3338;
+  --line-2: #54595d;
+  --link: #88a3e8;
+  --hover: rgba(234, 236, 240, 0.05);
+  --hl: #6b5718;
+  --hl-soft: #2a2416;
+  --river: #88a3e8;
+  --river-soft: #1b2440;
+
+  --stable: #3fb950;
+  --stable-soft: #10291a;
+  --changed: #d29922;
+  --changed-soft: #2d2410;
+  --disputed: #f85149;
+  --disputed-soft: #3a1a1c;
+  --new: #4493f8;
+  --new-soft: #0f2741;
+  --unknown: #9198a1;
+  --unknown-soft: #25292e;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -16px rgba(0, 0, 0, 0.8);
+  --code-bg: #0b0e11;
+  /* The seal art is black ink on transparent; in the dark theme it turns white, like the app's mask. */
+  --seal-filter: invert(1) brightness(0.93);
+}
+
+/* Per-level colour pair, used by badges, dots and chips. */
+.lv-stable { --c: var(--stable); --c-soft: var(--stable-soft); }
+.lv-changed { --c: var(--changed); --c-soft: var(--changed-soft); }
+.lv-disputed { --c: var(--disputed); --c-soft: var(--disputed-soft); }
+.lv-new { --c: var(--new); --c-soft: var(--new-soft); }
+.lv-unknown { --c: var(--unknown); --c-soft: var(--unknown-soft); }
+
+* { box-sizing: border-box; }
+html { background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { margin: 0; font: 14px/1.5 var(--font-sans); background: var(--paper); color: var(--ink); }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { font: inherit; color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 400; }
+p { margin: 0; }
+ol, ul { margin: 0; padding: 0; list-style: none; }
+dl, dd { margin: 0; }
+::selection { background: var(--hl); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--river); outline-offset: 2px; }
+
+.icon { flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -0.125em; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Buttons, as in the app. */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: var(--radius); background: var(--surface); color: var(--ink); font-size: 13px; font-weight: 600; white-space: nowrap; cursor: pointer; text-decoration: none; transition: background-color 0.15s, border-color 0.15s, transform 0.1s; }
+.btn:hover { border-color: var(--muted); background: var(--paper-2); text-decoration: none; }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--ink-2); border-color: var(--ink-2); color: var(--paper); }
+.btn-ghost { border-color: transparent; background: transparent; color: var(--ink-2); }
+.btn-ghost:hover { background: var(--hover); border-color: transparent; color: var(--ink); }
+.btn-lg { height: 44px; padding: 0 20px; font-size: 14px; }
+.btn-sm { height: 30px; padding: 0 10px; font-size: 12px; }
+.icon-btn { width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-2); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex: none; }
+.icon-btn:hover { background: var(--hover); color: var(--ink); }
+.icon-btn:disabled { opacity: 0.3; cursor: default; background: none; }
+
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+kbd { display: inline-block; min-width: 1.6em; padding: 0 0.4em; border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 3px; background: var(--paper-2); font: 600 0.85em/1.5 var(--font-code); text-align: center; color: var(--ink-2); }
+
+/* The brand, as in the app's top bar. */
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.brand:hover { text-decoration: none; }
+.brand-mark { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--line-2); border-radius: 50%; }
+.brand-mark img { width: 26px; height: 26px; filter: var(--seal-filter); }
+.brand-text { display: flex; flex-direction: column; }
+.brand-name { font-family: var(--font-serif); font-size: 22px; line-height: 1; letter-spacing: 0.02em; }
+.brand-tag { margin-top: 4px; font-size: 11px; line-height: 1; color: var(--muted); }
