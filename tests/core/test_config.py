@@ -17,6 +17,8 @@ REQUIRED = {
     "EMBED_DIMENSIONS": "768",
     "DATA_DIR": "somewhere",
     "WEB_ORIGIN": "https://web.example",
+    "ASK_RATE_LIMIT": "5",
+    "ASK_RATE_WINDOW_SECONDS": "30",
 }
 OPTIONAL = [
     "EMBED_API_KEY",
@@ -52,6 +54,7 @@ def test_environment_variables_supply_every_setting(clean_environment, monkeypat
     assert settings.embed_base_url == "https://embed.example/v1"
     assert (settings.embed_model, settings.embed_dimensions) == ("model-x", 768)
     assert str(settings.data_dir) == "somewhere"
+    assert (settings.ask_rate_limit, settings.ask_rate_window_seconds) == (5, 30)
 
 
 def test_env_file_supplies_settings_that_the_environment_lacks(clean_environment):

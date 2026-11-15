@@ -4,6 +4,8 @@ import os
 
 os.environ["DB_NAME"] = os.environ.get("TEST_DB_NAME", "wikisnitch_test")
 os.environ["EMBEDDER"] = "fake"
+# Tests ask many questions in a minute; the rate limit has its own tests.
+os.environ["ASK_RATE_LIMIT"] = "0"
 # Never reach a real answer model from tests, whatever .env says.
 for _name in ("LLM_ASK_BASE_URL", "LLM_ASSESS_BASE_URL", "LLM_ASK_API_KEY", "LLM_ASSESS_API_KEY"):
     os.environ[_name] = ""

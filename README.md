@@ -166,6 +166,7 @@ every setting.
 | `LLM_ASK_*`, `LLM_ASSESS_*` | Optional answer model for *Ask* and for cross-language verdicts: base URL, model, key |
 | `DATA_DIR` | Where downloaded datasets live (git-ignored) |
 | `WEB_ORIGIN` | The address the API accepts browser requests from |
+| `ASK_RATE_LIMIT`, `ASK_RATE_WINDOW_SECONDS` | How many questions one visitor may ask in each window. Every question can cost money on the answer model, so a visitor over the limit gets a 429 answer. 0 turns the limit off |
 
 The answer model key is read by the API only and never reaches the browser.
 

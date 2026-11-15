@@ -52,6 +52,8 @@ class Settings(EmbeddingSettings):
     db_vector_search_depth: int
     data_dir: Path
     web_origin: str
+    ask_rate_limit: int
+    ask_rate_window_seconds: int
     llm_ask_base_url: str = ""
     llm_ask_model: str = ""
     llm_ask_api_key: str = dc_field(default="", repr=False)
@@ -74,7 +76,14 @@ def _read_env_file(path: Path) -> dict[str, str]:
     return values
 
 
-_COERCE = {"db_port": int, "db_vector_search_depth": int, "embed_dimensions": int, "data_dir": Path}
+_COERCE = {
+    "db_port": int,
+    "db_vector_search_depth": int,
+    "embed_dimensions": int,
+    "ask_rate_limit": int,
+    "ask_rate_window_seconds": int,
+    "data_dir": Path,
+}
 _S = TypeVar("_S", bound=EmbeddingSettings)
 
 

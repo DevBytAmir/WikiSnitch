@@ -11,6 +11,11 @@ project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - README with what the project does, how it uses MariaDB, the data and the benchmark results, how
   to run it, every setting, the API, the project structure, testing, releases and credits.
+- A limit on how many questions one visitor can ask (`ASK_RATE_LIMIT` in each
+  `ASK_RATE_WINDOW_SECONDS`), so that a script cannot run up the cost of the answer model. A
+  visitor over the limit gets a 429 answer with the number of seconds to wait. The visitor is
+  identified behind the web server by the forwarded address, which is trusted only from the
+  same machine.
 
 ## [0.6.0] - 2026-11-14
 

@@ -50,7 +50,7 @@ def settings(**overrides):
         "db_host": "h", "db_port": 1, "db_user": "u", "db_password": "p",
         "db_root_password": "r", "db_name": "n", "db_vector_search_depth": 80,
         "embedder": "ollama", "embed_base_url": "http://embed.example/", "embed_model": "m",
-        "embed_dimensions": 3, "data_dir": ".", "web_origin": "http://web.example",
+        "embed_dimensions": 3, "data_dir": ".", "web_origin": "http://web.example", "ask_rate_limit": 0, "ask_rate_window_seconds": 60,
     }  # fmt: skip
     return Settings(**{**values, **overrides})
 
