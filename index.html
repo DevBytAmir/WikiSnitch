@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WikiSnitch: Wikipedia, with a memory</title>
+<meta name="description" content="WikiSnitch shows how a claim in a Finnish Wikipedia article changed over its edit history, which edits were vandalism that got undone, and what the English and Swedish articles say. Built with MariaDB vector search and system-versioned tables.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#101418" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<link rel="canonical" href="https://wikisnitch.lol/">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="WikiSnitch">
+<meta property="og:title" content="WikiSnitch: Wikipedia, with a memory">
+<meta property="og:description" content="See how a Finnish Wikipedia claim changed over its edit history and what the English and Swedish articles say about it.">
+<meta property="og:url" content="https://wikisnitch.lol/">
+<meta property="og:image" content="https://wikisnitch.lol/assets/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="WikiSnitch, Wikipedia, with a memory, with the seal logo.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WikiSnitch: Wikipedia, with a memory">
+<meta name="twitter:description" content="See how a Finnish Wikipedia claim changed over its edit history and what the English and Swedish articles say about it.">
+<meta name="twitter:image" content="https://wikisnitch.lol/assets/img/og-image.jpg">
+
+<script src="/assets/js/theme.js"></script>
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="preload" href="/assets/img/hero/seal.webp" as="image" type="image/webp" crossorigin>
+<link rel="preload" href="/assets/img/hero/moon.webp" as="image" type="image/webp">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebSite","@id":"https://wikisnitch.lol/#site","url":"https://wikisnitch.lol/","name":"WikiSnitch","description":"Wikipedia, with a memory.","inLanguage":"en"},
+{"@type":"SoftwareSourceCode","name":"WikiSnitch","description":"Paragraph-level edit history and cross-language comparison for Finnish Wikipedia articles, built on MariaDB system versioning and vector search.","codeRepository":"https://github.com/DevBytAmir/WikiSnitch","programmingLanguage":["Python","TypeScript"],"license":"https://opensource.org/license/mit"},
+{"@type":"VideoObject","name":"WikiSnitch demo","description":"A two-minute walkthrough of WikiSnitch: paragraph history, the time machine, cross-language comparison and cited answers.","thumbnailUrl":"https://wikisnitch.lol/assets/img/poster.jpg","contentUrl":"https://wikisnitch.lol/assets/video/demo.mp4","uploadDate":"2026-11-16","duration":"PT2M"}
+]}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="WikiSnitch, home">
+      <span class="brand-mark"><span class="brand-seal" aria-hidden="true"></span></span>
+      <span class="brand-text"><span class="brand-name">WikiSnitch</span><span class="brand-tag">Wikipedia, with a memory</span></span>
+    </a>
+    <nav class="nav" aria-label="Page sections">
+      <a href="#demo">Demo</a>
+      <a href="#what">What it does</a>
+      <a href="#mariadb">MariaDB</a>
+      <a href="#data">Data</a>
+      <a href="https://github.com/DevBytAmir/WikiSnitch">GitHub</a>
+    </nav>
+    <span class="spacer"></span>
+    <button class="theme-button" id="theme" type="button" aria-label="Switch between light and dark theme">Theme</button>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+  <section class="hero" aria-labelledby="title">
+    <div>
+      <div class="kicker">Junction 2026 · MariaDB challenge</div>
+      <h1 id="title">Watch Wikipedia evolve through time.</h1>
+      <p class="lede">Select a paragraph of a Finnish Wikipedia article and see how its claim changed over its edit history, which edits were vandalism that got undone, and what the English and Swedish articles say about it.</p>
+    </div>
+    <div id="hero-moon"></div>
+  </section>
+
+  <section class="demo" id="demo" aria-labelledby="demo-title">
+    <h2 id="demo-title">See it in action</h2>
+    <p class="demo-lede">A two-minute tour of the app: the article history, the cross-language comparison and cited answers.</p>
+    <video controls preload="metadata" poster="/assets/img/poster.jpg" playsinline>
+      <source src="/assets/video/demo.mp4" type="video/mp4">
+      Your browser can't play this video.
+    </video>
+  </section>
+
+  <section id="what" aria-labelledby="what-title">
+    <h2 id="what-title">What it does</h2>
+    <div class="cards">
+      <div class="card"><h3>Through time</h3><p>Every paragraph keeps its identity across thousands of edits. See when it appeared, every change to its wording, and which edits were vandalism that was undone.</p></div>
+      <div class="card"><h3>Across languages</h3><p>The closest paragraph in the English and Swedish articles, how close it is, and whether the numbers agree.</p></div>
+      <div class="card"><h3>Ask, with receipts</h3><p>Ask in Finnish, Swedish or English. Answers are cited to paragraphs, each with a trust badge, and can be asked as of a past date.</p></div>
+    </div>
+    <p class="note">Similarity measures meaning, not truth. WikiSnitch never claims which of two texts is right.</p>
+  </section>
+
+  <section id="mariadb" aria-labelledby="mariadb-title">
+    <h2 id="mariadb-title">How it uses MariaDB</h2>
+    <p>Paragraphs live in system-versioned tables, so MariaDB itself keeps every earlier state. Meaning is searched with a native <code>VECTOR(1024)</code> index. "What did Wikipedia say about this in 2012?" is one statement that joins the two:</p>
+<pre>SELECT v.distance, p.text
+FROM ( SELECT text_hash, VEC_DISTANCE_COSINE(embedding, VEC_FromText(?)) AS distance
+       FROM text_vector WHERE lang = 'fi' ORDER BY distance LIMIT 200 ) v
+JOIN paragraph FOR SYSTEM_TIME AS OF TIMESTAMP ? AS p
+  ON p.text_hash = v.text_hash AND p.lang = 'fi' AND p.undone = 0
+ORDER BY v.distance</pre>
+  </section>
+
+  <section id="data" aria-labelledby="data-title">
+    <h2 id="data-title">The data</h2>
+    <div class="table-wrap"><table>
+      <caption class="sr-only">Size of the dataset</caption>
+      <tr><td>Articles</td><td>29,460</td></tr>
+      <tr><td>History set</td><td>50 articles, 31,848 versions, 2003 to 2026</td></tr>
+      <tr><td>Paragraph states in the history set</td><td>44,091</td></tr>
+      <tr><td>Of those, from edits later undone</td><td>6,743</td></tr>
+      <tr><td>Paragraph vectors (bge-m3, 1024 dimensions)</td><td>236,131</td></tr>
+    </table></div>
+    <p class="note">The video above shows the app running. The code and the full write-up, including the retrieval benchmark, are on <a href="https://github.com/DevBytAmir/WikiSnitch">GitHub</a>.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Text and edit history from Wikipedia, licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, via MariaDB's Wikipedia datasets.</p>
+    <p>WikiSnitch is MIT licensed.</p>
+  </div>
+</footer>
+
+<script src="/assets/js/hero.js" defer></script>
+</body>
+</html>
