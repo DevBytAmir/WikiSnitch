@@ -1,0 +1,11 @@
+{
+  "name": "wikisnitch",
+  "compatibility_date": "2026-11-16",
+  "assets": {
+    "directory": "./",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "wikisnitch.lol", "custom_domain": true }
+  ]
+}
