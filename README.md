@@ -11,6 +11,8 @@ index.html            the page
 robots.txt            crawler rules
 sitemap.xml           list of pages for search engines
 _headers              response headers (security, caching)
+wrangler.jsonc        Worker config: serves this folder, shows 404.html for unknown paths
+.assetsignore         files kept out of what is served
 assets/
   css/site.css        all styles, light and dark themes as tokens
   js/theme.js         light/dark switch, remembers the choice
